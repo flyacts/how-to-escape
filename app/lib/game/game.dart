@@ -27,7 +27,6 @@ class EscapeGame {
       _currentRoomIndex = 0;
     }
     _currentRoomId = rooms.elementAt(_currentRoomIndex).id;
-    print(_currentRoomId);
   }
 
 }
