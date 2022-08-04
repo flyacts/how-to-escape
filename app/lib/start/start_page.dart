@@ -1,7 +1,24 @@
-import 'package:flutter/material.dart';
+import 'dart:collection';
 
-class StartPage extends StatelessWidget {
-  const StartPage({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:how_to_escape_app/game/game.dart';
+import 'package:how_to_escape_app/game/room/room.dart';
+
+
+class StartPage extends StatefulWidget {
+
+
+
+  @override
+  State<StatefulWidget> createState() {
+    return StartPageState();
+  }
+
+}
+
+class StartPageState extends State<StartPage> {
+
+  final EscapeGame game = EscapeGame(rooms: HashSet.from([Room(id: 'Raum 1'), Room(id: 'Raum 2')]));  
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +37,9 @@ class StartPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'My eyes are buring !',
-              style: TextStyle(
+            Text(
+              'Room ${game.currentRoomId}',
+              style: const TextStyle(
                 color: Colors.green,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -30,10 +47,13 @@ class StartPage extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('It Works!'), 
-                            duration: Duration(milliseconds: 5000),
+              onPressed: () {
+                game.goToNextRoom();
+                print(game.currentRoomId);
+                ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Text('It Works! ${game.currentRoomId}'), 
+                            duration: Duration(milliseconds: 1000),
                             backgroundColor: Colors.green,
                         )
                     ); 
@@ -49,4 +69,5 @@ class StartPage extends StatelessWidget {
       ),
     );
   }
+
 }

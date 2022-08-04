@@ -1,12 +1,17 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
+import 'package:how_to_escape_app/game/game.dart';
+import 'package:how_to_escape_app/game/room/room.dart';
 import 'package:how_to_escape_app/start/start_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -25,7 +30,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home: const StartPage(),
+      home: StartPage(),
     );
  }
 }
