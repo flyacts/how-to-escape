@@ -4,31 +4,48 @@ import 'package:how_to_escape_app/game/room/room.dart';
 class EscapeGame {
 
   /// The game rooms.
-  final Set<Room> rooms;
-
-  String _currentRoomId;
-  int _currentRoomIndex;
+  Room room;
 
   EscapeGame({
-    required this.rooms,
-  }): assert(rooms.isNotEmpty),
-      _currentRoomId = rooms.first.id,
-      _currentRoomIndex = 0;
+    required this.room,
+  });
 
-  String get currentRoomId {
-    return _currentRoomId;
+  isTopTraversible() {
+    return (room.transitionTop is Room);
   }
 
-  Room get currentRoom {
-    return rooms.firstWhere((element) => element.id == currentRoomId);
+  isBottomTraversible() {
+    return (room.transitionBottom is Room);
   }
 
-  goToNextRoom() {
-    _currentRoomIndex++;
-    if (_currentRoomIndex >= rooms.length) {
-      _currentRoomIndex = 0;
+  isLeftTraversible() {
+    return (room.transitionLeft is Room);
+  }
+
+  isRightTraversible() {
+    return (room.transitionRight is Room);
+  }
+
+  goToTop() {
+    if (isTopTraversible()) {
+      room = room.transitionTop as Room;
     }
-    _currentRoomId = rooms.elementAt(_currentRoomIndex).id;
+  }
+
+  goToBottom() {
+    if (isBottomTraversible()) {
+      room = room.transitionBottom as Room;
+    }
+  }
+  goToLeft() {
+    if (isLeftTraversible()) {
+      room = room.transitionLeft as Room;
+    }
+  }
+  goToRight() {
+    if (isRightTraversible()) {
+      room = room.transitionRight as Room;
+    }
   }
 
 }
