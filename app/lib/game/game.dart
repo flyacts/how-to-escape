@@ -1,6 +1,4 @@
 
-import 'dart:collection';
-
 import 'package:how_to_escape_app/game/room/room.dart';
 
 class EscapeGame {
@@ -12,13 +10,17 @@ class EscapeGame {
   int _currentRoomIndex;
 
   EscapeGame({
-    required Set<Room> this.rooms,
+    required this.rooms,
   }): assert(rooms.isNotEmpty),
       _currentRoomId = rooms.first.id,
       _currentRoomIndex = 0;
 
   String get currentRoomId {
     return _currentRoomId;
+  }
+
+  Room get currentRoom {
+    return rooms.firstWhere((element) => element.id == currentRoomId);
   }
 
   goToNextRoom() {

@@ -1,4 +1,4 @@
-import 'dart:collection';
+import 'dart:collection' show HashSet;
 
 import 'package:flutter/material.dart';
 import 'package:how_to_escape_app/game/game.dart';
@@ -15,7 +15,18 @@ class StartPage extends StatefulWidget {
 
 class StartPageState extends State<StartPage> {
 
-    final EscapeGame game = EscapeGame(rooms: HashSet.from([Room(id: 'Raum 1'), Room(id: 'Raum 2')])); 
+    final EscapeGame game = EscapeGame(rooms: HashSet.from([
+      Room(
+        id: 'qs-desk',
+        displayName: 'QS Desk',
+        backgroundImage: const AssetImage('./../../assets/images/desk_qs.jpg')
+      ),
+      Room(
+        id: 'sm-desk',
+        displayName: 'Scrum Master Desk',
+        backgroundImage: const AssetImage('./../../assets/images/desk_sm.jpg')
+      )
+    ])); 
 
     @override
     Widget build(BuildContext context) {
@@ -26,42 +37,38 @@ class StartPageState extends State<StartPage> {
             ),
             body: Container(
             constraints: const BoxConstraints.expand(),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 image: DecorationImage(
-                image: AssetImage('./../../assets/images/2017_Kraftwerk.jpg'),
+                image: game.currentRoom.backgroundImage,
                 fit: BoxFit.cover,
-                colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorDodge)
+                // colorFilter: const ColorFilter.mode(Color.fromARGB(137, 27, 27, 29), BlendMode.overlay)
             )),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                Text(
-                    'Current Room: ${game.currentRoomId}',
+                  Text(
+                    'Current Room: ${game.currentRoom.displayName}',
                     style: const TextStyle(
-                    color: Colors.green,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
+                      color: Color.fromARGB(255, 219, 225, 219),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
                     ),
-                ),
-                ElevatedButton(
+                  ),
+                  ElevatedButton(
                     onPressed: () {
-                    setState(() {game.goToNextRoom();});
-                    ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text('Going to Room ${game.currentRoomId}'), 
-                                duration: Duration(milliseconds: 1000),
-                                backgroundColor: Colors.green,
-                            )
-                        ); 
+                      setState(() {game.goToNextRoom();});
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Going to Room ${game.currentRoom.displayName}'), 
+                          duration: const Duration(milliseconds: 1000),
+                          backgroundColor: Colors.green,
+                        )
+                      ); 
                     },
                     child: const Text('Go to next Room!'),
                 )
-                // Text(
-                //   '$_counter',
-                //   style: Theme.of(context).textTheme.headline4,
-                // ),
-                ],
+              ],
             ),
             ),
         );
