@@ -46,28 +46,26 @@ class StartPageState extends State<StartPage> {
               ElevatedButton(
                 onPressed: () {
                   setState(() {game.goToLeft();});
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Going to Room ${game.room.displayName}'), 
-                      duration: const Duration(milliseconds: 1000),
-                      backgroundColor: Colors.green,
-                    )
-                  ); 
                 },
                 child: const Text('Go left'),
               ),
               ElevatedButton(
                 onPressed: () {
                   setState(() {game.goToRight();});
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Going to Room ${game.room.displayName}'), 
-                      duration: const Duration(milliseconds: 1000),
-                      backgroundColor: Colors.green,
-                    )
-                  ); 
                 },
                 child: const Text('Go right'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {game.goToTop();});
+                },
+                child: const Text('Go forwards'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {game.goToBottom();});
+                },
+                child: const Text('Go backwards'),
               )
             ],
           ),
