@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart' show AssetImage;
 import 'package:how_to_escape_app/game/room/room.dart';
 
@@ -44,6 +46,10 @@ final exitHallway = Room(
 );
 
 void initRooms() {
+  var transitions = HashSet<Transition>();
+  transitions.add(Transition(x: 100, y: 100));
+  qsDesk.transitions = transitions;
+
   qsDesk.transitionLeft = smDesk;
   smDesk.transitionRight = qsDesk;
   smDesk.transitionTop = exitOffice;

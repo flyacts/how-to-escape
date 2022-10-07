@@ -11,6 +11,8 @@ class Room {
     Room? transitionLeft;
     Room? transitionRight;
 
+    Set<Transition>? transitions;
+
     Room({
         required this.id,
         required this.displayName,
@@ -19,9 +21,21 @@ class Room {
         this.transitionBottom,
         this.transitionLeft,
         this.transitionRight,
+        this.transitions,
     });
 
-    setLeftTransition(Room room) {
-      transitionLeft = room;
-    }
+
+}
+
+class Transition {
+  // final Room room;
+  final int x;
+  final int y;
+
+  Transition({
+    // required this.room,
+    required this.x,
+    required this.y,
+  });
+
 }
