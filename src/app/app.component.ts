@@ -11,4 +11,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
     public title = 'escape-game';
+
+    public constructor(
+        public store: 
+    )
 }

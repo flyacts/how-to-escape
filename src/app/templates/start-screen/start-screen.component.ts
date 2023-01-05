@@ -3,6 +3,9 @@
  */
 
 import { Component } from '@angular/core';
+import { EmitterService } from '@ngxs-labs/emitter';
+
+import { GameState } from '../../states/game.state';
 
 @Component({
     selector: 'app-start-screen',
@@ -11,7 +14,11 @@ import { Component } from '@angular/core';
 })
 export class StartScreenComponent {
 
+    public constructor(
+        private emitter: EmitterService,
+    ) { }
+
     public startGame(): void {
-        console.log('start game!');
+        this.emitter.action(GameState.startGame).emit();
     }
 }

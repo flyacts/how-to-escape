@@ -8,6 +8,10 @@
             align-items: center;
             justify-content: center;
         position: absolute;
+
+        * {
+            user-select: none;
+        }
     }
     
     .sign-container {
@@ -32,12 +36,19 @@
         .sign {
             font-size: 12px;
             transform: rotate(90deg);
-            user-select: none;
         }
     }
 
-    .welcome-1-container {
+    .start-hint-container {
         border: 1px solid red;
+        top: 360px;
+        left: 92px;
+        width: 250px;
+        height: 50px;
+        transform: skew(0deg, -5deg);
+    }
+
+    .welcome-1-container {
         top: 87px;
         right: 37px;
         width: 270px;
