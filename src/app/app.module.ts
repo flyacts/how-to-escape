@@ -10,6 +10,7 @@ import { NgxsEmitPluginModule } from '@ngxs-labs/emitter';
 
 import { AppComponent } from './app.component';
 import { GameState } from './states/game.state';
+import { DeskQsComponent } from './templates/desk-qs/desk-qs.component';
 import { PcQsComponent } from './templates/pc-qs/pc-qs.component';
 import { StartScreenComponent } from './templates/start-screen/start-screen.component';
 
@@ -18,6 +19,7 @@ import { StartScreenComponent } from './templates/start-screen/start-screen.comp
         AppComponent,
         StartScreenComponent,
         PcQsComponent,
+        DeskQsComponent,
     ],
     imports: [
         BrowserModule,

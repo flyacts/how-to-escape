@@ -3,17 +3,19 @@
  */
 
 import { Injectable } from '@angular/core';
-import { State, StateContext } from '@ngxs/store';
-import { Receiver } from '@ngxs-labs/emitter';
+import { Selector, State, StateContext } from '@ngxs/store';
+import { EmitterAction, Receiver } from '@ngxs-labs/emitter';
+
+import { GlobalStateInterface } from './globalstate.interface';
 
 export interface GameStateModel {
-    clickedOnGo: boolean;
+    currentScene: keyof GlobalStateInterface;
 }
 
 @State<GameStateModel>({
     name: 'game',
     defaults: {
-        clickedOnGo: false,
+        currentScene: 'game',
     },
 })
 @Injectable({
@@ -22,11 +24,19 @@ export interface GameStateModel {
 export class GameState {
 
     @Receiver()
-    public static startGame(
+    public static goToScene(
         state: StateContext<GameStateModel>,
+        action: EmitterAction<keyof GlobalStateInterface>,
     ): void {
         state.patchState({
-            clickedOnGo: true,
+            currentScene: action.payload,
         });
+    }
+
+    @Selector()
+    public static currentScene(
+        state: GameStateModel,
+    ): keyof GlobalStateInterface {
+        return state.currentScene;
     }
 }

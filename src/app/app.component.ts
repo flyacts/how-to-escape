@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { GlobalState } from './states/globalstate.interface';
+import { GameState } from './states/game.state';
 
 @Component({
     selector: 'app-root',
@@ -16,13 +16,13 @@ import { GlobalState } from './states/globalstate.interface';
 export class AppComponent implements OnInit {
     public title = 'escape-game';
 
-    public clickedOnGo$!: Observable<boolean>;
+    public currentScene$!: Observable<string>;
 
     public constructor(
         public store: Store,
     ) { }
 
     public ngOnInit(): void {
-        this.clickedOnGo$ = this.store.select((state: GlobalState) => state.game.clickedOnGo);
+        this.currentScene$ = this.store.select(GameState.currentScene);
     }
 }

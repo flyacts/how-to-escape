@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 import { EmitterService } from '@ngxs-labs/emitter';
 
 import { GameState } from '../../states/game.state';
+import { GlobalStateInterface } from '../../states/globalstate.interface';
 
 @Component({
     selector: 'app-start-screen',
@@ -19,6 +20,6 @@ export class StartScreenComponent {
     ) { }
 
     public startGame(): void {
-        this.emitter.action(GameState.startGame).emit();
+        this.emitter.action<keyof GlobalStateInterface>(GameState.goToScene).emit('pcQs');
     }
 }
