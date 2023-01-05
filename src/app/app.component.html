@@ -1,6 +1,6 @@
 <div class="app">
     <!-- <div class="scene-container"> -->
-        <app-start-screen></app-start-screen>
-        <app-pc-qs *ngIf=""></app-pc-qs>
+        <app-start-screen *ngIf="!(clickedOnGo$ | async)"></app-start-screen>
+        <app-pc-qs *ngIf="clickedOnGo$ | async"></app-pc-qs>
     <!-- </div> -->
 </div>

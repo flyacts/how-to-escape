@@ -5,5 +5,5 @@
 import { GameStateModel } from './game.state';
 
 export interface GlobalState {
-    game: GameStateModel
+    game: GameStateModel;
 }
