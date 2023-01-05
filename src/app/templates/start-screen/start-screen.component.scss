@@ -1,0 +1,52 @@
+.start-screen {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+
+    .absolute-flex-container {
+        display: flex;
+            align-items: center;
+            justify-content: center;
+        position: absolute;
+    }
+    
+    .sign-container {
+        display: flex;
+            align-items: center;
+            justify-content: center;
+
+        cursor: pointer;
+        position: absolute;
+        bottom: 76px;
+        right: 10px;
+        width: 27px;
+        color: black;
+        background-color: rgba(161, 195, 221, 1);
+        height: 38px;
+        transform: skew(10deg, 0deg);
+
+        &:hover {
+            background-color: rgb(106, 171, 221, 1);
+        }
+        
+        .sign {
+            font-size: 12px;
+            transform: rotate(90deg);
+            user-select: none;
+        }
+    }
+
+    .welcome-1-container {
+        border: 1px solid red;
+        top: 87px;
+        right: 37px;
+        width: 270px;
+        height: 110px;
+        transform: rotate(-13deg);
+
+        .welcome-1 {
+            font-size: 24px;
+            text-align: center;
+        }
+    }
+}
