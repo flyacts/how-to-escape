@@ -2,7 +2,7 @@
  * @copyright FLYACTS GmbH 2022
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
