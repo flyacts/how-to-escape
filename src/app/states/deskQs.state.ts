@@ -13,7 +13,7 @@ export interface DeskQsStateModel {
 @State<DeskQsStateModel>({
     name: 'deskQs',
     defaults: {
-        
+
     },
 })
 @Injectable({

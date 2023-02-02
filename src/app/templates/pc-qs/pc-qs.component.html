@@ -1,13 +1,4 @@
 <div class="scene-container">
-    <img src="../../../assets/images/desk_qs_detail.jpg">
-
-    <div class="arrow"
-        (click)="leavePc()">
-        <span></span>
-    </div>
-
-    <div class="hover-highlight">
-        
-    </div>
-
+    <img  (load)="setup()" src="../../../assets/images/desk_qs_detail.jpg">
+    <canvas #canvas></canvas>
 </div>
