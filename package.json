@@ -22,6 +22,7 @@
         "@ngxs-labs/emitter": "^4.0.0",
         "@ngxs/storage-plugin": "^3.7.6",
         "@ngxs/store": "^3.7.6",
+        "pixi.js": "^7.1.2",
         "rxjs": "~7.5.0",
         "tslib": "^2.3.0",
         "zone.js": "~0.12.0"
@@ -37,6 +38,7 @@
         "@angular/compiler-cli": "^15.0.0",
         "@flyacts/eslint-config": "^4.1.0",
         "@types/jasmine": "~4.3.0",
+        "@types/offscreencanvas": "^2019.7.0",
         "@typescript-eslint/eslint-plugin": "5.44.0",
         "@typescript-eslint/parser": "5.44.0",
         "eslint": "^8.28.0",

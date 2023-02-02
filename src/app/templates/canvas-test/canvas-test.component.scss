@@ -1,0 +1,11 @@
+.canvas-test {
+    display: flex;
+    position: relative;
+    width: fit-content;
+
+    canvas {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+}
