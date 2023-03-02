@@ -6,6 +6,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { EmitterService } from '@ngxs-labs/emitter';
 import * as PIXI from 'pixi.js';
 
+import { createPixiApp } from '../../helpers';
 import { GameState } from '../../states/game.state';
 import { GlobalStateInterface } from '../../states/globalstate.interface';
 
@@ -34,15 +35,6 @@ export class PcQsComponent {
      * setup
      */
     public setup(): void {
-        this.pixiApp = new PIXI.Application({
-            backgroundAlpha: 0,
-            view: this.canvas.nativeElement,
-        });
-
-        this.canvas.nativeElement.height = this.canvas.nativeElement.clientHeight;
-        this.canvas.nativeElement.width = this.canvas.nativeElement.clientWidth;
-
-
+        this.pixiApp = createPixiApp(this.canvas);
     }
-
 }

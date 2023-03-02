@@ -3,3 +3,4 @@
  */
 
 export * from './create-arrow.function';
+export * from './create-pixi-app.function';

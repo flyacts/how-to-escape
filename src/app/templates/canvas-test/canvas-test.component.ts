@@ -7,7 +7,7 @@ import '@pixi/graphics';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Application as PixiApp } from 'pixi.js';
 
-import { createArrow } from '../../helpers';
+import { createArrow, createPixiApp } from '../../helpers';
 
 @Component({
     selector: 'app-canvas-test',
@@ -24,15 +24,7 @@ export class CanvasTestComponent {
      * setup
      */
     public setup(): void {
-        const height = this.canvas.nativeElement.clientHeight;
-        const width = this.canvas.nativeElement.clientWidth;
-
-        this.pixiApp = new PixiApp({
-            backgroundAlpha: 0,
-            view: this.canvas.nativeElement,
-            height,
-            width,
-        });
+        this.pixiApp = createPixiApp(this.canvas);
 
         const goToFloorArrow = createArrow({
             tipX: 1500,

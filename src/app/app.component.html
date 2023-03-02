@@ -1,7 +1,8 @@
 <div class="app">
-    <!-- <div class="scene-container"> -->
-        <app-start-screen *ngIf="(currentScene$ | async) === 'game'"></app-start-screen>
-        <app-pc-qs *ngIf="(currentScene$ | async) === 'pcQs'"></app-pc-qs>
-    <!-- </div> -->
-    <!-- <app-canvas-test></app-canvas-test> -->
+    <app-start-screen *ngIf="(currentScene$ | async) === 'game'"></app-start-screen>
+    <app-desk-qs *ngIf="(currentScene$ | async) === 'deskQs'"></app-desk-qs>
+    <app-floor-qs *ngIf="(currentScene$ | async) === 'floorQs'"></app-floor-qs>
+    <app-floor-ac *ngIf="(currentScene$ | async) === 'floorAc'"></app-floor-ac>
+
+    <canvas #canvas height="1080" width="1618"></canvas>
 </div>
