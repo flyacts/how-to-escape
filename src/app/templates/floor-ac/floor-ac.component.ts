@@ -2,11 +2,11 @@
  * @copyright FLYACTS GmbH 2022
  */
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { EmitterService } from '@ngxs-labs/emitter';
 import * as PIXI from 'pixi.js';
 
-import { createArrow, createPixiApp } from '../../helpers';
+import { createArrow } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 import { GameState } from '../../states/game.state';
 import { GlobalStateInterface } from '../../states/globalstate.interface';
@@ -23,8 +23,8 @@ export class FloorAcComponent {
         private scenceService: SceneService,
     ) { }
 
-    public goToQsDesk(): void {
-        this.emitter.action<keyof GlobalStateInterface>(GameState.goToScene).emit('deskQs');
+    public goToQsFloor(): void {
+        this.emitter.action<keyof GlobalStateInterface>(GameState.goToScene).emit('floorQs');
     }
 
     /**
@@ -32,19 +32,18 @@ export class FloorAcComponent {
      */
     public setup(): void {
         const goToQSDesk = createArrow({
-            tipX: 1700,
-            tipY: 400,
+            tipX: 750,
+            tipY: 1250,
             color: 0x212121,
-            direction: 'right',
+            direction: 'bottom',
             size: 100,
-            angle: 20,
+            angle: -15,
         });
 
-        goToQSDesk.onmouseup = (event: PIXI.FederatedPointerEvent): void => {
-            this.goToQsDesk();
+        goToQSDesk.onmouseup = (): void => {
+            this.goToQsFloor();
         };
 
         this.scenceService.pixiApp?.stage.addChild(goToQSDesk);
-
     }
 }
