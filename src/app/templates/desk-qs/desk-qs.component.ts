@@ -4,7 +4,7 @@
 
 import { Component, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
 
-import { Arrow, createArrow } from '../../helpers';
+import { Arrow, createArrow, createIcon } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 import * as PIXI from 'pixi.js';
 
@@ -36,6 +36,10 @@ export class DeskQsComponent implements OnInit {
         const lampIcon = await this.createLampIcon();
         
         this.sceneService.pixiApp?.stage.addChild(lampIcon);
+
+        const keyboardIcon = await this.createKeyboardIcon();
+
+        this.sceneService.pixiApp?.stage.addChild(keyboardIcon);
     }
 
     /**
@@ -62,14 +66,7 @@ export class DeskQsComponent implements OnInit {
      * create lamp icon
      */
     private async createLampIcon(): Promise<PIXI.Sprite> {
-        const lampIconPath = '../../../assets/icons/lamp.svg';
-        const texture = await PIXI.Texture.fromURL(lampIconPath);
-        const sprite = PIXI.Sprite.from(texture);
-
-        sprite.interactive = true;
-        sprite.cursor = 'pointer';
-        sprite.position.x = 890;
-        sprite.position.y = 180;
+        const sprite = await createIcon('../../../assets/icons/lamp.svg', 890, 180);
 
         // be initially invisible
         sprite.alpha = 0;
@@ -77,6 +74,33 @@ export class DeskQsComponent implements OnInit {
         // toggle on click
         sprite.onmouseup = (): void => {
             this.isLampOn.set(!this.isLampOn());
+        };
+
+        // be visible on hover
+        sprite.onmouseover = (): void => {
+            sprite.alpha = 1;
+
+            // be invisible again on leave
+            sprite.onmouseleave = (): void => {
+                sprite.alpha = 0;
+            }
+        };
+
+        return sprite;
+    }
+
+    /**
+     * create keyboard icon
+     */
+    private async createKeyboardIcon(): Promise<PIXI.Sprite> {
+        const sprite = await createIcon('../../../assets/icons/search.svg', 705, 625);
+
+        // be initially invisible
+        sprite.alpha = 0;
+
+        // toggle on click
+        sprite.onmouseup = (): void => {
+            // do stuff
         };
 
         // be visible on hover
