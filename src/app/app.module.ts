@@ -12,6 +12,7 @@ import { FloorAcComponent } from './templates/floor-ac/floor-ac.component';
 import { FloorQsComponent } from './templates/floor-qs/floor-qs.component';
 import { PcQsComponent } from './templates/pc-qs/pc-qs.component';
 import { StartScreenComponent } from './templates/start-screen/start-screen.component';
+import { DeskQsKeyboardComponent } from './templates/desk-qs-keyboard/desk-qs-keyboard.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { StartScreenComponent } from './templates/start-screen/start-screen.comp
         StartScreenComponent,
         PcQsComponent,
         DeskQsComponent,
+        DeskQsKeyboardComponent,
         FloorQsComponent,
         FloorAcComponent,
     ],

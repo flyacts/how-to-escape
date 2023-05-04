@@ -18,12 +18,27 @@ export class SceneService {
     private CURRENT_SCENE = 'CURRENT_SCENE';
     private FALLBACK_SCENE = 'game';
 
+
+    public isQsDeskLightOn: WritableSignal<boolean> = signal(false);
+
     public constructor() {
         this.currentScene = signal(this.getCurrentScene());
 
         effect(() => {
             this.clear();
             localStorage.setItem(this.CURRENT_SCENE, this.currentScene());
+        });
+
+        // initialize and play audio when desk qs lamp is turned on
+        const lampOnaudio = new Audio();
+
+        lampOnaudio.src = '../../assets/audio/secret2.mp3';
+        lampOnaudio.load();
+
+        effect(async () => {
+            if (this.isQsDeskLightOn()) {
+                await lampOnaudio.play();
+            }
         });
     }
 

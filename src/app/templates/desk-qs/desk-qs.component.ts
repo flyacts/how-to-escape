@@ -16,30 +16,15 @@ import * as PIXI from 'pixi.js';
 export class DeskQsComponent implements OnInit {
 
     public iconSrc: Signal<string>;
-    public isLampOn: WritableSignal<boolean>;
     
 
     public constructor(
         private sceneService: SceneService,
     ) {
-
-        this.isLampOn = signal(false);
-        this.iconSrc = computed(() => !this.isLampOn()
+        this.iconSrc = computed(() => !this.sceneService.isQsDeskLightOn()
             ? '../../../assets/images/desk_qs_1.png'
             : '../../../assets/images/desk_qs_2.png'
         );
-
-        // initialize and play audio when lamp is turned on
-        const lampOnaudio = new Audio();
-
-        lampOnaudio.src = '../../assets/audio/secret2.mp3';
-        lampOnaudio.load();
-
-        effect(async () => {
-            if (this.isLampOn()) {
-                await lampOnaudio.play();
-            }
-        });
     }
 
     public async ngOnInit(): Promise<void> {
@@ -87,7 +72,7 @@ export class DeskQsComponent implements OnInit {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            this.isLampOn.set(!this.isLampOn());
+            this.sceneService.isQsDeskLightOn.set(!this.sceneService.isQsDeskLightOn());
         };
 
         // be visible on hover
@@ -114,7 +99,7 @@ export class DeskQsComponent implements OnInit {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            // do stuff
+            this.sceneService.currentScene.set('deskQsKeyboard');
         };
 
         // be visible on hover
