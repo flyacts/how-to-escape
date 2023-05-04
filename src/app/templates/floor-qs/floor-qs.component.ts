@@ -35,13 +35,11 @@ export class FloorQsComponent {
      * setup
      */
     public setup(): void {
-        const goToQSDesk = createArrow({
-            tipX: 1700,
-            tipY: 400,
-            color: 0x212121,
-            direction: 'right',
-            size: 100,
-            angle: 20,
+        const goToQSDesk = createCircle({
+            x: 1400,
+            y: 900,
+            color: 0x10ABF3,
+            size: 20,
         });
 
         goToQSDesk.onmouseup = (): void => {
