@@ -13,7 +13,7 @@ interface ArrowData {
     angle?: number;
 }
 
-class Arrow extends Graphics {
+export class Arrow extends Graphics {
     public data!: ArrowData;
 }
 
