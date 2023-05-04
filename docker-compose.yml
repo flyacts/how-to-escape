@@ -1,0 +1,27 @@
+version: '3'
+services:
+    ###########################################################################
+    # APP
+    ###########################################################################
+    .app-base: &app-base
+        image: node:18.16.0-alpine
+        user: node
+        volumes:
+            - .:/work
+        working_dir: /work
+        environment:
+            - NG_CLI_ANALYTICS=ci
+
+    app-setup:
+        <<: *app-base
+        command: npm ci
+        working_dir: /work
+        environment:
+            - NPM_CONFIG_CACHE=/work/.npm-cache
+
+    app-dev:
+        <<: *app-base
+        command: npm run start
+        ports:
+            - 4200:4200
+        container_name: escape-app
