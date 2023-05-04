@@ -1,0 +1,22 @@
+.text-input {
+    width: 48px;
+    height: 48px;
+    border: 3px solid rebeccapurple;
+    background-color: black;
+    color: antiquewhite;
+    font-size: 32px;
+    padding: 16px;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-input-container {
+    position: absolute;
+    top: 300px;
+    left: 300px;
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}
