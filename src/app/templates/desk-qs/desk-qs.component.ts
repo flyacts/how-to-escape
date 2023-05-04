@@ -2,7 +2,7 @@
  * @copyright FLYACTS GmbH 2022
  */
 
-import { Component, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { Component, OnInit, Signal, WritableSignal, computed, effect, signal } from '@angular/core';
 
 import { Arrow, createArrow, createIcon } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
@@ -17,15 +17,29 @@ export class DeskQsComponent implements OnInit {
 
     public iconSrc: Signal<string>;
     public isLampOn: WritableSignal<boolean>;
+    
 
     public constructor(
         private sceneService: SceneService,
     ) {
+
         this.isLampOn = signal(false);
         this.iconSrc = computed(() => !this.isLampOn()
             ? '../../../assets/images/desk_qs_1.png'
             : '../../../assets/images/desk_qs_2.png'
         );
+
+        // initialize and play audio when lamp is turned on
+        const lampOnaudio = new Audio();
+
+        lampOnaudio.src = '../../assets/audio/secret2.mp3';
+        lampOnaudio.load();
+
+        effect(async () => {
+            if (this.isLampOn()) {
+                await lampOnaudio.play();
+            }
+        });
     }
 
     public async ngOnInit(): Promise<void> {
