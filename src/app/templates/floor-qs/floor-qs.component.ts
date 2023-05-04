@@ -4,7 +4,8 @@
 
 import { Component } from '@angular/core';
 
-import { createArrow } from '../../helpers';
+import { Scene } from '../../enum';
+import { createArrow, createCircle } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
@@ -19,11 +20,15 @@ export class FloorQsComponent {
     ) { }
 
     public goToQsDesk(): void {
-        this.sceneService.currentScene.set('deskQs');
+        this.sceneService.currentScene.set(Scene.DeskQS);
+    }
+
+    public goToDeskDev3(): void {
+        this.sceneService.currentScene.set(Scene.DeskDev3);
     }
 
     public goToACFloor(): void {
-        this.sceneService.currentScene.set('floorAc');
+        this.sceneService.currentScene.set(Scene.FloorAc);
     }
 
     /**
@@ -58,5 +63,20 @@ export class FloorQsComponent {
         };
 
         this.sceneService.pixiApp?.stage.addChild(goToACFloor);
+
+        const goToDeskDev3 = createCircle({
+            x: 1050,
+            y: 650,
+            size: 20,
+            color: 0x10ABF3,
+        });
+
+        goToDeskDev3.onmouseup = (): void => {
+            this.goToDeskDev3();
+        };
+
+        this.sceneService.pixiApp?.stage.addChild(goToDeskDev3);
+
+
     }
 }

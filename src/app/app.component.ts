@@ -4,6 +4,7 @@
 
 import { Component, ElementRef, OnInit, ViewChild, WritableSignal  } from '@angular/core';
 
+import { Scene } from './enum';
 import { createPixiApp } from './helpers';
 import { SceneService } from './services/scene.service';
 
@@ -18,8 +19,9 @@ export class AppComponent implements OnInit {
     public canvas!: ElementRef<HTMLCanvasElement>;
 
     public title = 'escape-game';
+    public scene = Scene;
 
-    public currentScene!: WritableSignal<string>;
+    public currentScene!: WritableSignal<Scene>;
 
     public constructor(
         public sceneService: SceneService,

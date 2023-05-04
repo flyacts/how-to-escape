@@ -1,10 +1,15 @@
 <div class="app">
-    <app-start-screen *ngIf="currentScene() === 'game'"></app-start-screen>
-    <app-desk-qs *ngIf="currentScene() === 'deskQs'"></app-desk-qs>
-    <app-floor-qs *ngIf="currentScene() === 'floorQs'"></app-floor-qs>
-    <app-floor-ac *ngIf="currentScene() === 'floorAc'"></app-floor-ac>
-    <app-desk-qs-keyboard *ngIf="currentScene() === 'deskQsKeyboard'"></app-desk-qs-keyboard>
+    <app-start-screen *ngIf="currentScene() === scene.Start"></app-start-screen>
+    <!-- QS -->
+    <app-floor-qs *ngIf="currentScene() === scene.FloorQs"></app-floor-qs>
+    <app-desk-qs *ngIf="currentScene() === scene.DeskQS"></app-desk-qs>
+    <app-desk-qs-keyboard *ngIf="currentScene() === scene.DeskQSKeyboard"></app-desk-qs-keyboard>
 
+    <!-- DEV 3 -->
+    <app-desk-dev-3 *ngIf="currentScene() === scene.DeskDev3"></app-desk-dev-3>
+
+    <!-- AC -->
+    <app-floor-ac *ngIf="currentScene() === scene.FloorAc"></app-floor-ac>
 
     <canvas #canvas height="1080" width="1618"></canvas>
 </div>

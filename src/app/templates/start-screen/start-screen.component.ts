@@ -5,6 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Graphics, Text } from 'pixi.js';
 
+import { Scene } from '../../enum';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
@@ -52,7 +53,7 @@ export class StartScreenComponent implements OnInit {
     }
 
     public async startGame(): Promise<void> {
-        this.sceneService.currentScene.set('deskQs');
+        this.sceneService.currentScene.set(Scene.DeskQS);
 
         // const audio = new Audio();
 

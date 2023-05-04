@@ -2,11 +2,12 @@
  * @copyright FLYACTS GmbH 2022
  */
 
-import { Component, OnInit, Signal, WritableSignal, computed, effect, signal } from '@angular/core';
+import { Component, computed, OnInit, Signal } from '@angular/core';
+import * as PIXI from 'pixi.js';
 
+import { Scene } from '../../enum';
 import { Arrow, createArrow, createIcon } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
-import * as PIXI from 'pixi.js';
 
 @Component({
     selector: 'app-desk-qs',
@@ -16,14 +17,13 @@ import * as PIXI from 'pixi.js';
 export class DeskQsComponent implements OnInit {
 
     public iconSrc: Signal<string>;
-    
 
     public constructor(
         private sceneService: SceneService,
     ) {
         this.iconSrc = computed(() => !this.sceneService.isQsDeskLightOn()
             ? '../../../assets/images/desk_qs_1.png'
-            : '../../../assets/images/desk_qs_2.png'
+            : '../../../assets/images/desk_qs_2.png',
         );
     }
 
@@ -33,7 +33,7 @@ export class DeskQsComponent implements OnInit {
         this.sceneService.pixiApp?.stage.addChild(leaveDeskArrow);
 
         const lampIcon = await this.createLampIcon();
-        
+
         this.sceneService.pixiApp?.stage.addChild(lampIcon);
 
         const keyboardIcon = await this.createKeyboardIcon();
@@ -55,7 +55,7 @@ export class DeskQsComponent implements OnInit {
         });
 
         leaveDesk.onmouseup = (): void => {
-            this.sceneService.currentScene.set('floorQs');
+            this.sceneService.currentScene.set(Scene.FloorQs);
         };
 
         return leaveDesk;
@@ -82,7 +82,7 @@ export class DeskQsComponent implements OnInit {
             // be invisible again on leave
             sprite.onmouseleave = (): void => {
                 sprite.alpha = 0;
-            }
+            };
         };
 
         return sprite;
@@ -99,7 +99,7 @@ export class DeskQsComponent implements OnInit {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            this.sceneService.currentScene.set('deskQsKeyboard');
+            this.sceneService.currentScene.set(Scene.DeskQSKeyboard);
         };
 
         // be visible on hover
@@ -109,7 +109,7 @@ export class DeskQsComponent implements OnInit {
             // be invisible again on leave
             sprite.onmouseleave = (): void => {
                 sprite.alpha = 0;
-            }
+            };
         };
 
         return sprite;

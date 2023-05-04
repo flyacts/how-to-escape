@@ -5,6 +5,8 @@
 import { effect, Injectable, signal, WritableSignal } from '@angular/core';
 import * as PIXI from 'pixi.js';
 
+import { Scene } from '../enum';
+
 
 @Injectable({
     providedIn: 'root',
@@ -13,20 +15,20 @@ export class SceneService {
 
     public pixiApp?: PIXI.Application;
 
-    public currentScene: WritableSignal<string>;
-
-    private CURRENT_SCENE = 'CURRENT_SCENE';
-    private FALLBACK_SCENE = 'game';
-
+    public currentScene: WritableSignal<Scene>;
 
     public isQsDeskLightOn: WritableSignal<boolean> = signal(false);
+
+    private CURRENT_SCENE = 'CURRENT_SCENE';
+    private FALLBACK_SCENE = 0;
+
 
     public constructor() {
         this.currentScene = signal(this.getCurrentScene());
 
         effect(() => {
             this.clear();
-            localStorage.setItem(this.CURRENT_SCENE, this.currentScene());
+            localStorage.setItem(this.CURRENT_SCENE, this.currentScene().toString());
         });
 
         // initialize and play audio when desk qs lamp is turned on
@@ -52,7 +54,9 @@ export class SceneService {
     /**
      * get the current scene
      */
-    private getCurrentScene(): string {
-        return localStorage.getItem(this.CURRENT_SCENE) ?? this.FALLBACK_SCENE;
+    private getCurrentScene(): Scene {
+        const scene = localStorage.getItem(this.CURRENT_SCENE);
+
+        return scene ? +scene : this.FALLBACK_SCENE;
     }
 }

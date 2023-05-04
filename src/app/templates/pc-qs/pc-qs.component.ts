@@ -4,6 +4,7 @@
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
+import { Scene } from '../../enum';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
@@ -25,6 +26,6 @@ export class PcQsComponent {
     }
 
     public leavePc(): void {
-        this.sceneService.currentScene.set('deskQs');
+        this.sceneService.currentScene.set(Scene.DeskQS);
     }
 }
