@@ -3,12 +3,8 @@
  */
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { EmitterService } from '@ngxs-labs/emitter';
-import * as PIXI from 'pixi.js';
 
-import { createPixiApp } from '../../helpers';
-import { GameState } from '../../states/game.state';
-import { GlobalStateInterface } from '../../states/globalstate.interface';
+import { SceneService } from '../../services/scene.service';
 
 @Component({
     selector: 'app-pc-qs',
@@ -20,21 +16,15 @@ export class PcQsComponent {
     @ViewChild('canvas', { static: true })
     public canvas!: ElementRef<HTMLCanvasElement>;
 
-    private pixiApp!: PIXI.Application;
-
     public constructor(
-        private emitter: EmitterService,
+        private sceneService: SceneService,
     ) { }
 
-    public leavePc(): void {
-        this.emitter.action<keyof GlobalStateInterface>(GameState.goToScene).emit('deskQs');
-        console.log('meh');
+    public setup(): void {
+        // do stuff here.
     }
 
-    /**
-     * setup
-     */
-    public setup(): void {
-        this.pixiApp = createPixiApp(this.canvas);
+    public leavePc(): void {
+        this.sceneService.currentScene.set('deskQs');
     }
 }

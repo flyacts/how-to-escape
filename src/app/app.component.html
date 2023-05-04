@@ -1,8 +1,8 @@
 <div class="app">
-    <app-start-screen *ngIf="(currentScene$ | async) === 'game'"></app-start-screen>
-    <app-desk-qs *ngIf="(currentScene$ | async) === 'deskQs'"></app-desk-qs>
-    <app-floor-qs *ngIf="(currentScene$ | async) === 'floorQs'"></app-floor-qs>
-    <app-floor-ac *ngIf="(currentScene$ | async) === 'floorAc'"></app-floor-ac>
+    <app-start-screen *ngIf="currentScene() === 'game'"></app-start-screen>
+    <app-desk-qs *ngIf="currentScene() === 'deskQs'"></app-desk-qs>
+    <app-floor-qs *ngIf="currentScene() === 'floorQs'"></app-floor-qs>
+    <app-floor-ac *ngIf="currentScene() === 'floorAc'"></app-floor-ac>
 
     <canvas #canvas height="1080" width="1618"></canvas>
 </div>

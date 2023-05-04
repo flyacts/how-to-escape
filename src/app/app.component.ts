@@ -2,13 +2,10 @@
  * @copyright FLYACTS GmbH 2022
  */
 
-import { Component, ElementRef, OnInit, ViewChild  } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Component, ElementRef, OnInit, ViewChild, WritableSignal  } from '@angular/core';
 
 import { createPixiApp } from './helpers';
 import { SceneService } from './services/scene.service';
-import { GameState } from './states/game.state';
 
 @Component({
     selector: 'app-root',
@@ -22,16 +19,14 @@ export class AppComponent implements OnInit {
 
     public title = 'escape-game';
 
-    public currentScene$!: Observable<string>;
+    public currentScene!: WritableSignal<string>;
 
     public constructor(
-        public store: Store,
         public sceneService: SceneService,
     ) { }
 
     public ngOnInit(): void {
-        this.currentScene$ = this.store.select(GameState.currentScene);
+        this.currentScene = this.sceneService.currentScene;
         this.sceneService.pixiApp = createPixiApp(this.canvas);
-
     }
 }

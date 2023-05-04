@@ -2,14 +2,10 @@
  * @copyright FLYACTS GmbH 2022
  */
 
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { EmitterService } from '@ngxs-labs/emitter';
-import * as PIXI from 'pixi.js';
+import { Component, OnInit } from '@angular/core';
 
-import { createArrow, createPixiApp } from '../../helpers';
+import { createArrow } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
-import { GameState } from '../../states/game.state';
-import { GlobalStateInterface } from '../../states/globalstate.interface';
 
 @Component({
     selector: 'app-desk-qs',
@@ -19,7 +15,6 @@ import { GlobalStateInterface } from '../../states/globalstate.interface';
 export class DeskQsComponent implements OnInit {
 
     public constructor(
-        private emitter: EmitterService,
         private sceneService: SceneService,
     ) { }
 
@@ -41,6 +36,6 @@ export class DeskQsComponent implements OnInit {
     }
 
     public leaveDesk(): void {
-        this.emitter.action<keyof GlobalStateInterface>(GameState.goToScene).emit('floorQs');
+        this.sceneService.currentScene.set('floorQs');
     }
 }

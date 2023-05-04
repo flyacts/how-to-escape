@@ -3,13 +3,9 @@
  */
 
 import { Component } from '@angular/core';
-import { EmitterService } from '@ngxs-labs/emitter';
-import * as PIXI from 'pixi.js';
 
 import { createArrow } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
-import { GameState } from '../../states/game.state';
-import { GlobalStateInterface } from '../../states/globalstate.interface';
 
 @Component({
     selector: 'app-floor-qs',
@@ -19,16 +15,15 @@ import { GlobalStateInterface } from '../../states/globalstate.interface';
 export class FloorQsComponent {
 
     public constructor(
-        private emitter: EmitterService,
-        private scenceService: SceneService,
+        private sceneService: SceneService,
     ) { }
 
     public goToQsDesk(): void {
-        this.emitter.action<keyof GlobalStateInterface>(GameState.goToScene).emit('deskQs');
+        this.sceneService.currentScene.set('deskQs');
     }
 
     public goToACFloor(): void {
-        this.emitter.action<keyof GlobalStateInterface>(GameState.goToScene).emit('floorAc');
+        this.sceneService.currentScene.set('floorAc');
     }
 
     /**
@@ -48,7 +43,7 @@ export class FloorQsComponent {
             this.goToQsDesk();
         };
 
-        this.scenceService.pixiApp?.stage.addChild(goToQSDesk);
+        this.sceneService.pixiApp?.stage.addChild(goToQSDesk);
 
         const goToACFloor = createArrow({
             tipX: 700,
@@ -62,6 +57,6 @@ export class FloorQsComponent {
             this.goToACFloor();
         };
 
-        this.scenceService.pixiApp?.stage.addChild(goToACFloor);
+        this.sceneService.pixiApp?.stage.addChild(goToACFloor);
     }
 }

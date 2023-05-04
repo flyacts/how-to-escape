@@ -3,12 +3,9 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { EmitterService } from '@ngxs-labs/emitter';
 import { Graphics, Text } from 'pixi.js';
 
 import { SceneService } from '../../services/scene.service';
-import { GameState } from '../../states/game.state';
-import { GlobalStateInterface } from '../../states/globalstate.interface';
 
 @Component({
     selector: 'app-start-screen',
@@ -18,7 +15,6 @@ import { GlobalStateInterface } from '../../states/globalstate.interface';
 export class StartScreenComponent implements OnInit {
 
     public constructor(
-        private emitter: EmitterService,
         private sceneService: SceneService,
     ) { }
 
@@ -56,7 +52,7 @@ export class StartScreenComponent implements OnInit {
     }
 
     public async startGame(): Promise<void> {
-        this.emitter.action<keyof GlobalStateInterface>(GameState.goToScene).emit('deskQs');
+        this.sceneService.currentScene.set('deskQs');
 
         // const audio = new Audio();
 

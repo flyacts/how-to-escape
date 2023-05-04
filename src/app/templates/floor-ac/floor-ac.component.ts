@@ -3,13 +3,9 @@
  */
 
 import { Component } from '@angular/core';
-import { EmitterService } from '@ngxs-labs/emitter';
-import * as PIXI from 'pixi.js';
 
 import { createArrow } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
-import { GameState } from '../../states/game.state';
-import { GlobalStateInterface } from '../../states/globalstate.interface';
 
 @Component({
     selector: 'app-floor-ac',
@@ -19,12 +15,11 @@ import { GlobalStateInterface } from '../../states/globalstate.interface';
 export class FloorAcComponent {
 
     public constructor(
-        private emitter: EmitterService,
-        private scenceService: SceneService,
+        private sceneService: SceneService,
     ) { }
 
     public goToQsFloor(): void {
-        this.emitter.action<keyof GlobalStateInterface>(GameState.goToScene).emit('floorQs');
+        this.sceneService.currentScene.set('floorQs');
     }
 
     /**
@@ -44,6 +39,6 @@ export class FloorAcComponent {
             this.goToQsFloor();
         };
 
-        this.scenceService.pixiApp?.stage.addChild(goToQSDesk);
+        this.sceneService.pixiApp?.stage.addChild(goToQSDesk);
     }
 }
