@@ -18,6 +18,7 @@ import { DeskDevDanielHeadphonesComponent } from './templates/desk-dev-daniel-he
 import { DoorComponent } from './templates/door/door.component';
 import { DeskDevMikeComponent } from './templates/desk-dev-mike/desk-dev-mike.component';
 import { CouchComponent } from './templates/couch/couch.component';
+import { FlymanComponent } from './templates/flyman/flyman.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { CouchComponent } from './templates/couch/couch.component';
         DoorComponent,
         FloorQsComponent,
         FloorAcComponent,
+        FlymanComponent,
     ],
     imports: [
         BrowserModule,

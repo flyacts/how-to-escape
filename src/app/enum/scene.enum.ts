@@ -15,5 +15,5 @@ export enum Scene {
     Door,
     FloorAc,
     FloorQs,
-
+    Flyman,
 }

@@ -22,9 +22,11 @@ export class DoorComponent implements OnInit{
     public ngOnInit(): void {
         const goToFloorAC = this.createFloorAcArrow();
         const goToCouch = this.createCouchTarget();
+        const goToFlyman = this.createFlymanTeleport();
 
         this.sceneService.pixiApp?.stage.addChild(goToFloorAC);
         this.sceneService.pixiApp?.stage.addChild(goToCouch);
+        this.sceneService.pixiApp?.stage.addChild(goToFlyman);
     }
 
     /**
@@ -60,7 +62,24 @@ export class DoorComponent implements OnInit{
         };
     
         return goToCouch;
+    }
 
+    /**
+     * create clickable to Flyman scene
+     */
+    public createFlymanTeleport(): InteractionCircle {
+        const goToDesk = createCircle({
+            x: 1020,
+            y: 610,
+            size: 10,
+            color: 0x10ABF3,
+        });
+
+        goToDesk.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.Flyman);
+        };
+
+        return goToDesk;
     }
 
 }
