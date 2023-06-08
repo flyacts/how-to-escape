@@ -20,11 +20,13 @@ export class FloorAcComponent implements OnInit{
     ) { }
 
     public ngOnInit(): void {
-        const goToDevDanielDesk = this.createDevDanielTeleport();
         const goToDoor = this.createDoorTeleport();
+        const goToDevDeskDaniel = this.createDevDanielTeleport();
+        const goToDevDeskMike = this.createDevMikeTeleport();
         
-        this.sceneService.pixiApp?.stage.addChild(goToDevDanielDesk);
         this.sceneService.pixiApp?.stage.addChild(goToDoor);
+        this.sceneService.pixiApp?.stage.addChild(goToDevDeskDaniel);
+        this.sceneService.pixiApp?.stage.addChild(goToDevDeskMike);
     }
 
     public goToQsFloor(): void {
@@ -32,21 +34,39 @@ export class FloorAcComponent implements OnInit{
     }
 
     /**
-     * create clickable to dek dev daniel
+     * create clickable to Daniel's desk
      */
     public createDevDanielTeleport(): InteractionCircle {
-        const goToACFloor = createCircle({
+        const goToDesk = createCircle({
             x: 1400,
             y: 800,
             size: 20,
             color: 0x10ABF3,
         });
 
-        goToACFloor.onmouseup = (): void => {
+        goToDesk.onmouseup = (): void => {
             this.sceneService.currentScene.set(Scene.DeskDevDaniel);
         };
 
-        return goToACFloor;
+        return goToDesk;
+    }
+
+    /**
+     * create clickable to Mike's desk
+     */
+    public createDevMikeTeleport(): InteractionCircle {
+        const goToDesk = createCircle({
+            x: 180,
+            y: 800,
+            size: 20,
+            color: 0x10ABF3,
+        });
+
+        goToDesk.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.DeskDevMike);
+        };
+
+        return goToDesk;
     }
 
 

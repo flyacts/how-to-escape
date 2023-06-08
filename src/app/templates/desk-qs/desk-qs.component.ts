@@ -6,7 +6,7 @@ import { Component, computed, OnInit, Signal } from '@angular/core';
 import * as PIXI from 'pixi.js';
 
 import { Scene } from '../../enum';
-import { Arrow, createArrow, createIcon } from '../../helpers';
+import { Arrow, createArrow, createIcon, createLampIcon } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
@@ -32,7 +32,7 @@ export class DeskQsComponent implements OnInit {
 
         this.sceneService.pixiApp?.stage.addChild(leaveDeskArrow);
 
-        const lampIcon = await this.createLampIcon();
+        const lampIcon = await createLampIcon(890, 180, this.sceneService.isQsDeskLightOn);
 
         this.sceneService.pixiApp?.stage.addChild(lampIcon);
 
@@ -59,33 +59,6 @@ export class DeskQsComponent implements OnInit {
         };
 
         return leaveDesk;
-    }
-
-    /**
-     * create lamp icon
-     */
-    private async createLampIcon(): Promise<PIXI.Sprite> {
-        const sprite = await createIcon('../../../assets/icons/lamp.svg', 890, 180);
-
-        // be initially invisible
-        sprite.alpha = 0;
-
-        // toggle on click
-        sprite.onmouseup = (): void => {
-            this.sceneService.isQsDeskLightOn.set(!this.sceneService.isQsDeskLightOn());
-        };
-
-        // be visible on hover
-        sprite.onmouseover = (): void => {
-            sprite.alpha = 1;
-
-            // be invisible again on leave
-            sprite.onmouseleave = (): void => {
-                sprite.alpha = 0;
-            };
-        };
-
-        return sprite;
     }
 
     /**
