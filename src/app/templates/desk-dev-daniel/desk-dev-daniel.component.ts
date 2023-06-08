@@ -3,23 +3,24 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import * as PIXI from 'pixi.js';
 
 import { Scene } from '../../enum';
-import { Arrow, createArrow } from '../../helpers';
+import { Arrow, createArrow, createIcon } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
-    selector: 'app-desk-dev-3',
-    templateUrl: './desk-dev-3.component.html',
-    styleUrls: ['./desk-dev-3.component.scss'],
+    selector: 'app-desk-dev-daniel',
+    templateUrl: './desk-dev-daniel.component.html',
+    styleUrls: ['./desk-dev-daniel.component.scss'],
 })
-export class DeskDev3Component implements OnInit {
+export class DeskDevDanielComponent implements OnInit {
 
     public constructor(
         private sceneService: SceneService,
     ) {  }
 
-    public ngOnInit(): void {
+    public async ngOnInit(): Promise<void> {
         const leaveDeskToQs = this.createFloorQsArrow();
 
         this.sceneService.pixiApp?.stage.addChild(leaveDeskToQs);
@@ -27,6 +28,10 @@ export class DeskDev3Component implements OnInit {
         const leaveDeskToAc = this.createFloorAcArrow();
 
         this.sceneService.pixiApp?.stage.addChild(leaveDeskToAc);
+
+        const headphonesIcon = await this.createHeadphonesIcon();
+
+        this.sceneService.pixiApp?.stage.addChild(headphonesIcon);
     }
 
     /**
@@ -49,7 +54,6 @@ export class DeskDev3Component implements OnInit {
         return leaveDesk;
     }
 
-
     /**
      * create arrow to floorQs
      */
@@ -70,5 +74,31 @@ export class DeskDev3Component implements OnInit {
         return leaveDesk;
     }
 
+    /**
+     * create headphones on icon
+     */
+    private async createHeadphonesIcon(): Promise<PIXI.Sprite> {
+    const sprite = await createIcon('../../../assets/icons/headphones_on.svg', 100, 100);
+
+    // be initially invisible
+    sprite.alpha = 1;
+
+    // toggle on click
+    sprite.onmouseup = (): void => {
+        this.sceneService.currentScene.set(Scene.DeskDevDanielHeadphones);
+    };
+
+    // be visible on hover
+    sprite.onmouseover = (): void => {
+        sprite.alpha = 1;
+
+        // be invisible again on leave
+        sprite.onmouseleave = (): void => {
+            sprite.alpha = 0;
+        };
+    };
+
+    return sprite;
+}
 
 }

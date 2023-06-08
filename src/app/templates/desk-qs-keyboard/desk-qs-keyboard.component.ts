@@ -39,11 +39,15 @@ export class DeskQsKeyboardComponent {
             : '../../../assets/images/desk_qs_keyboard_2.png',
         );
 
-        // TODO: add fail and success audio
-        const enterAudio = new Audio();
+        const successAudio = new Audio();
 
-        enterAudio.src = '../../assets/audio/enter.wav';
-        enterAudio.load();
+        successAudio.src = '../../assets/audio/enter.wav';
+        successAudio.load();
+
+        const failureAudio = new Audio();
+
+        failureAudio.src = '../../assets/audio/fail.mp3';
+        failureAudio.load();
 
         const arrow = this.createDeskQsArrow();
 
@@ -75,9 +79,7 @@ export class DeskQsKeyboardComponent {
         keyEnterRect.on('mouseup', () => {
             console.log(`pressed enter`);
 
-            this.text = '';
-
-            enterAudio.play();
+            this.text == 'cr4ftw3rk' ? successAudio.play() : failureAudio.play();
         });
 
         this.sceneService.pixiApp?.stage.addChild(keyEnterRect);

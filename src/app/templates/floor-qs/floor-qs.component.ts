@@ -23,8 +23,8 @@ export class FloorQsComponent {
         this.sceneService.currentScene.set(Scene.DeskQS);
     }
 
-    public goToDeskDev3(): void {
-        this.sceneService.currentScene.set(Scene.DeskDev3);
+    public goToDeskDevDaniel(): void {
+        this.sceneService.currentScene.set(Scene.DeskDevDaniel);
     }
 
     public goToACFloor(): void {
@@ -62,18 +62,18 @@ export class FloorQsComponent {
 
         this.sceneService.pixiApp?.stage.addChild(goToACFloor);
 
-        const goToDeskDev3 = createCircle({
+        const goToDeskDevDaniel = createCircle({
             x: 1050,
             y: 650,
             size: 20,
             color: 0x10ABF3,
         });
 
-        goToDeskDev3.onmouseup = (): void => {
-            this.goToDeskDev3();
+        goToDeskDevDaniel.onmouseup = (): void => {
+            this.goToDeskDevDaniel();
         };
 
-        this.sceneService.pixiApp?.stage.addChild(goToDeskDev3);
+        this.sceneService.pixiApp?.stage.addChild(goToDeskDevDaniel);
 
 
     }

@@ -20,9 +20,9 @@ export class FloorAcComponent implements OnInit{
     ) { }
 
     public ngOnInit(): void {
-        const goToDev3Desk = this.createDev3Teleport();
+        const goToDevDanielDesk = this.createDevDanielTeleport();
 
-        this.sceneService.pixiApp?.stage.addChild(goToDev3Desk);
+        this.sceneService.pixiApp?.stage.addChild(goToDevDanielDesk);
     }
 
     public goToQsFloor(): void {
@@ -30,9 +30,9 @@ export class FloorAcComponent implements OnInit{
     }
 
     /**
-     * create clickable to dek dev 3
+     * create clickable to dek dev daniel
      */
-    public createDev3Teleport(): InteractionCircle {
+    public createDevDanielTeleport(): InteractionCircle {
         const goToACFloor = createCircle({
             x: 1400,
             y: 800,
@@ -41,7 +41,7 @@ export class FloorAcComponent implements OnInit{
         });
 
         goToACFloor.onmouseup = (): void => {
-            this.sceneService.currentScene.set(Scene.DeskDev3);
+            this.sceneService.currentScene.set(Scene.DeskDevDaniel);
         };
 
         return goToACFloor;
