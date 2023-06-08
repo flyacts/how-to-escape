@@ -31,12 +31,13 @@ export class DeskDevDanielHeadphonesComponent implements OnInit {
 
         this.sceneService.pixiApp?.stage.addChild(leaveDeskToAc);
 
-        const headphonesIcon = await this.createHeadphonesIcon();
+        const headphonesIconLeft = await this.createHeadphonesIcon(140,460);
+        const headphonesIconRight = await this.createHeadphonesIcon(1360,460);
 
-        this.sceneService.pixiApp?.stage.addChild(headphonesIcon);
+        this.sceneService.pixiApp?.stage.addChild(headphonesIconLeft);
+        this.sceneService.pixiApp?.stage.addChild(headphonesIconRight);
 
         this.noise = await this.playNoise();
-
     }
 
     /**
@@ -85,8 +86,8 @@ export class DeskDevDanielHeadphonesComponent implements OnInit {
     /**
      * create headphones off icon
      */
-     private async createHeadphonesIcon(): Promise<PIXI.Sprite> {
-        const sprite = await createIcon('../../../assets/icons/headphones_off.svg', 100, 480);
+     private async createHeadphonesIcon(x: number, y: number): Promise<PIXI.Sprite> {
+        const sprite = await createIcon('../../../assets/icons/headphones_off.svg', x, y);
 
         // be initially invisible
         sprite.alpha = 0;
