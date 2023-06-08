@@ -23,7 +23,9 @@ export class FloorAcComponent implements OnInit{
         const goToDoor = this.createDoorTeleport();
         const goToDevDeskDaniel = this.createDevDanielTeleport();
         const goToDevDeskMike = this.createDevMikeTeleport();
-        
+        const goToCouch = this.createCouchTarget();
+
+        this.sceneService.pixiApp?.stage.addChild(goToCouch);        
         this.sceneService.pixiApp?.stage.addChild(goToDoor);
         this.sceneService.pixiApp?.stage.addChild(goToDevDeskDaniel);
         this.sceneService.pixiApp?.stage.addChild(goToDevDeskMike);
@@ -88,6 +90,22 @@ export class FloorAcComponent implements OnInit{
         };
 
         return arrow;
+    }
+
+    public createCouchTarget(): InteractionCircle {
+        const goToCouch = createCircle({
+            x: 580,
+            y: 650,
+            color: 0x10ABF3,
+            size: 20,
+        });
+    
+        goToCouch.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.Couch);
+        };
+    
+        return goToCouch;
+
     }
 
 

@@ -13,9 +13,11 @@
     <!-- AC -->
     <app-floor-ac *ngIf="currentScene() === scene.FloorAc"></app-floor-ac>
 
-
     <!-- Door -->
     <app-door *ngIf="currentScene() === scene.Door"></app-door>
+
+    <!-- Couch -->
+    <app-couch *ngIf="currentScene() === scene.Couch"></app-couch>
 
     <canvas #canvas height="1080" width="1618"></canvas>
 </div>

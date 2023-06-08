@@ -21,8 +21,10 @@ export class DoorComponent implements OnInit{
 
     public ngOnInit(): void {
         const goToFloorAC = this.createFloorAcArrow();
+        const goToCouch = this.createCouchTarget();
 
         this.sceneService.pixiApp?.stage.addChild(goToFloorAC);
+        this.sceneService.pixiApp?.stage.addChild(goToCouch);
     }
 
     /**
@@ -43,6 +45,22 @@ export class DoorComponent implements OnInit{
         };
 
         return leaveDoor;
+    }
+
+    public createCouchTarget(): InteractionCircle {
+        const goToCouch = createCircle({
+            x: 180,
+            y: 930,
+            color: 0x10ABF3,
+            size: 20,
+        });
+    
+        goToCouch.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.Couch);
+        };
+    
+        return goToCouch;
+
     }
 
 }

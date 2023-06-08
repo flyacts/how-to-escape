@@ -17,11 +17,13 @@ import { StartScreenComponent } from './templates/start-screen/start-screen.comp
 import { DeskDevDanielHeadphonesComponent } from './templates/desk-dev-daniel-headphones/desk-dev-daniel-headphones.component';
 import { DoorComponent } from './templates/door/door.component';
 import { DeskDevMikeComponent } from './templates/desk-dev-mike/desk-dev-mike.component';
+import { CouchComponent } from './templates/couch/couch.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         CanvasTestComponent,
+        CouchComponent,
         StartScreenComponent,
         PcQsComponent,
         DeskQsComponent,

@@ -4,6 +4,7 @@
 
 export enum Scene {
     Start,
+    Couch,
     DeskAC,
     DeskDevDaniel,
     DeskDevDanielHeadphones,
