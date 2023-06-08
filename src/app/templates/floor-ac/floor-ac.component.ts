@@ -5,7 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Scene } from '../../enum';
-import { createArrow, createCircle, InteractionCircle } from '../../helpers';
+import { Arrow, createArrow, createCircle, InteractionCircle } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
@@ -21,8 +21,10 @@ export class FloorAcComponent implements OnInit{
 
     public ngOnInit(): void {
         const goToDevDanielDesk = this.createDevDanielTeleport();
-
+        const goToDoor = this.createDoorTeleport();
+        
         this.sceneService.pixiApp?.stage.addChild(goToDevDanielDesk);
+        this.sceneService.pixiApp?.stage.addChild(goToDoor);
     }
 
     public goToQsFloor(): void {
@@ -45,6 +47,27 @@ export class FloorAcComponent implements OnInit{
         };
 
         return goToACFloor;
+    }
+
+
+    /**
+     * create arrow to door
+     */
+    public createDoorTeleport(): Arrow {
+        const arrow = createArrow({
+            tipX: 810,
+            tipY: 700,
+            color: 0x212121,
+            direction: 'top',
+            size: 100,
+            angle: 0,
+        });
+
+        arrow.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.Door);
+        };
+
+        return arrow;
     }
 
 

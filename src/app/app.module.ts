@@ -15,6 +15,7 @@ import { FloorQsComponent } from './templates/floor-qs/floor-qs.component';
 import { PcQsComponent } from './templates/pc-qs/pc-qs.component';
 import { StartScreenComponent } from './templates/start-screen/start-screen.component';
 import { DeskDevDanielHeadphonesComponent } from './templates/desk-dev-daniel-headphones/desk-dev-daniel-headphones.component';
+import { DoorComponent } from './templates/door/door.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { DeskDevDanielHeadphonesComponent } from './templates/desk-dev-daniel-he
         DeskDevDanielComponent,
         DeskDevDanielHeadphonesComponent,
         DeskQsKeyboardComponent,
+        DoorComponent,
         FloorQsComponent,
         FloorAcComponent,
     ],
