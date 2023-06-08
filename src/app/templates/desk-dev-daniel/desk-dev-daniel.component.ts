@@ -78,27 +78,27 @@ export class DeskDevDanielComponent implements OnInit {
      * create headphones on icon
      */
     private async createHeadphonesIcon(): Promise<PIXI.Sprite> {
-    const sprite = await createIcon('../../../assets/icons/headphones_on.svg', 100, 100);
+        const sprite = await createIcon('../../../assets/icons/headphones_on.svg', 465, 570);
 
-    // be initially invisible
-    sprite.alpha = 1;
+        // be initially invisible
+        sprite.alpha = 0;
 
-    // toggle on click
-    sprite.onmouseup = (): void => {
-        this.sceneService.currentScene.set(Scene.DeskDevDanielHeadphones);
-    };
-
-    // be visible on hover
-    sprite.onmouseover = (): void => {
-        sprite.alpha = 1;
-
-        // be invisible again on leave
-        sprite.onmouseleave = (): void => {
-            sprite.alpha = 0;
+        // toggle on click
+        sprite.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.DeskDevDanielHeadphones);
         };
-    };
 
-    return sprite;
-}
+        // be visible on hover
+        sprite.onmouseover = (): void => {
+            sprite.alpha = 1;
+
+            // be invisible again on leave
+            sprite.onmouseleave = (): void => {
+                sprite.alpha = 0;
+            };
+        };
+
+        return sprite;
+    }
 
 }

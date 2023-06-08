@@ -16,6 +16,8 @@ import { SceneService } from '../../services/scene.service';
 })
 export class DeskDevDanielHeadphonesComponent implements OnInit {
 
+    private noise?:HTMLAudioElement;
+
     public constructor(
         private sceneService: SceneService,
     ) {  }
@@ -25,13 +27,16 @@ export class DeskDevDanielHeadphonesComponent implements OnInit {
 
         this.sceneService.pixiApp?.stage.addChild(leaveDeskToQs);
 
-        const leaveDeskToAc = await this.createFloorAcArrow();
+        const leaveDeskToAc = this.createFloorAcArrow();
 
         this.sceneService.pixiApp?.stage.addChild(leaveDeskToAc);
 
         const headphonesIcon = await this.createHeadphonesIcon();
 
         this.sceneService.pixiApp?.stage.addChild(headphonesIcon);
+
+        this.noise = await this.playNoise();
+
     }
 
     /**
@@ -49,6 +54,7 @@ export class DeskDevDanielHeadphonesComponent implements OnInit {
 
         leaveDesk.onmouseup = (): void => {
             this.sceneService.currentScene.set(Scene.FloorQs);
+            this.noise?.pause();
         };
 
         return leaveDesk;
@@ -70,6 +76,7 @@ export class DeskDevDanielHeadphonesComponent implements OnInit {
 
         leaveDesk.onmouseup = (): void => {
             this.sceneService.currentScene.set(Scene.FloorAc);
+            this.noise?.pause();
         };
 
         return leaveDesk;
@@ -79,14 +86,15 @@ export class DeskDevDanielHeadphonesComponent implements OnInit {
      * create headphones off icon
      */
      private async createHeadphonesIcon(): Promise<PIXI.Sprite> {
-        const sprite = await createIcon('../../../assets/icons/headphones_off.svg', 890, 180);
+        const sprite = await createIcon('../../../assets/icons/headphones_off.svg', 100, 480);
 
         // be initially invisible
         sprite.alpha = 0;
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            this.sceneService.isQsDeskLightOn.set(!this.sceneService.isQsDeskLightOn());
+            this.sceneService.currentScene.set(Scene.DeskDevDaniel);
+            this.noise?.pause();
         };
 
         // be visible on hover
@@ -102,4 +110,15 @@ export class DeskDevDanielHeadphonesComponent implements OnInit {
         return sprite;
     }
 
+    public async playNoise(): Promise<HTMLAudioElement> {
+        // placeholder whitenoise for a riddle
+        const noise = new Audio();
+
+        noise.src = '../assets/audio/noise.mp3';
+        noise.load();
+        noise.loop = true;
+        await noise.play();
+
+        return noise;
+    }
 }
