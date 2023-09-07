@@ -23,12 +23,16 @@ export class FloorAcComponent implements OnInit{
         const goToDoor = this.createDoorTeleport();
         const goToDevDeskDaniel = this.createDevDanielTeleport();
         const goToDevDeskMike = this.createDevMikeTeleport();
+        const goToDevDeskToni = this.createDevToniTeleport();
         const goToCouch = this.createCouchTarget();
+        const goToFridge = this.createFridgeTarget();
 
         this.sceneService.pixiApp?.stage.addChild(goToCouch);        
         this.sceneService.pixiApp?.stage.addChild(goToDoor);
+        this.sceneService.pixiApp?.stage.addChild(goToFridge);
         this.sceneService.pixiApp?.stage.addChild(goToDevDeskDaniel);
         this.sceneService.pixiApp?.stage.addChild(goToDevDeskMike);
+        this.sceneService.pixiApp?.stage.addChild(goToDevDeskToni);
     }
 
     public goToQsFloor(): void {
@@ -71,6 +75,24 @@ export class FloorAcComponent implements OnInit{
         return goToDesk;
     }
 
+    /**
+     * create clickable to Toni's desk
+     */
+    public createDevToniTeleport(): InteractionCircle {
+        const goToDesk = createCircle({
+            x: 1100,
+            y: 660,
+            size: 20,
+            color: 0x10ABF3,
+        });
+
+        goToDesk.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.DeskDevToni);
+        };
+
+        return goToDesk;
+    }
+
 
     /**
      * create arrow to door
@@ -105,7 +127,21 @@ export class FloorAcComponent implements OnInit{
         };
     
         return goToCouch;
+    }
 
+    public createFridgeTarget(): InteractionCircle {
+        const goToFridge = createCircle({
+            x: 990,
+            y: 590,
+            color: 0x10ABF3,
+            size: 20,
+        });
+    
+        goToFridge.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.Fridge);
+        };
+    
+        return goToFridge;
     }
 
 

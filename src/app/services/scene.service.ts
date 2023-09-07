@@ -19,7 +19,10 @@ export class SceneService {
 
     public isQsDeskLightOn: WritableSignal<boolean> = signal(false);
     public isDevDeskMikeLightOn: WritableSignal<boolean> = signal(false);
+    public isDevDeskToniBoxOpen: WritableSignal<boolean> = signal(false);
 
+    public fridgeState: WritableSignal<'closed' | 'open' | 'freezer-open'> = signal('closed');
+    
     private CURRENT_SCENE = 'CURRENT_SCENE';
     private FALLBACK_SCENE = 0;
 
