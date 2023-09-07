@@ -31,8 +31,8 @@ export class TextService {
         this.textContainer.style.width = '40%';
         this.textContainer.style.color = '#BBB';
         this.textContainer.style.padding = '16px 32px';
-        this.textContainer.style.backgroundImage = 'url("/assets/images/snackbar-background.jpg")';
-        this.textContainer.style.boxShadow = '0 0 30px 30px #000';
+        this.textContainer.style.background = '#111';
+        this.textContainer.style.boxShadow = '0 0 30px 30px #111';
     }
 
     /**
@@ -40,7 +40,7 @@ export class TextService {
      */
     public showText(
         text: string,
-        duration = 5000,
+        duration = 5000000,
     ): void {
         this.textContainer.textContent = text;
         this.textContainer.style.transition = `opacity ${this.fadeInTime}ms`;
