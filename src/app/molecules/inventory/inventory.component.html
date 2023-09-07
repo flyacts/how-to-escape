@@ -1,0 +1,8 @@
+<div class="inventory-toggle">
+    <img src="../../../assets/icons/backpack.svg" alt="" (click)="isOpen = !isOpen">
+    <div class="inventory-list" [ngClass]="{'isOpen': isOpen}">
+        <div class="inventory-item" *ngFor="let item of inventory" (click)="useInventoryItem(item)">
+            <img [src]="'../../../assets/images/' + item.imageName" alt="">
+        </div>
+    </div>
+</div>

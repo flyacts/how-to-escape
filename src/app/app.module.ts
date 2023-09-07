@@ -23,6 +23,7 @@ import { FlymanComponent } from './templates/flyman/flyman.component';
 import { DeskDevToniComponent } from './templates/desk-dev-toni/desk-dev-toni.component';
 import { DeskDsSaschaComponent } from './templates/desk-ds-sascha/desk-ds-sascha.component';
 import { FridgeComponent } from './templates/fridge/fridge.component';
+import { InventoryComponent } from './molecules/inventory/inventory.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { FridgeComponent } from './templates/fridge/fridge.component';
         FloorAcComponent,
         FlymanComponent,
         FridgeComponent,
+        InventoryComponent,
     ],
     imports: [
         BrowserAnimationsModule,

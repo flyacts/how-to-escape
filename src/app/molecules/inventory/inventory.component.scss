@@ -1,0 +1,77 @@
+.inventory-toggle {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  margin: 0 50px 50px;
+  padding: 10px 5px 10px 15px;
+  z-index: 0;
+
+  border: 10px solid white;
+  border-radius: 50%;
+
+  background-color: black;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+    cursor: pointer;
+  }
+
+  .inventory-list {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    bottom: -10px;
+    width: 50px;
+    box-sizing: border-box;
+    margin-left: 40px;
+    padding: 10px 0;
+    z-index: -1;
+
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    border: 10px solid white;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-left: none;
+
+    background-color: black;
+    overflow: hidden;
+    transition: width 0.5s;
+
+    &.isOpen {
+      width: 500px;
+      padding: 10px 50px 10px 100px;
+      transition: width 0.5s, padding 0.5s;
+
+      .inventory-item {
+        transition-delay: 1s;
+        transition: opacity 1s;
+        opacity: 1;
+      }
+    }
+
+    .inventory-item {
+      width: 50px;
+      height: 50px;
+      padding: 5px;
+	  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+	  
+      border-radius: 10px;
+      box-shadow: 0 0 5px white;
+      cursor: pointer;
+      opacity: 0;
+
+      &:hover {
+        background-color: white;
+        box-shadow: 0 0 10px white;
+      }
+    }
+  }
+}
