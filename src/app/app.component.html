@@ -1,15 +1,15 @@
 <div class="app">
-    <app-start-screen *ngIf="currentScene() === scene.Start"></app-start-screen>
+    <app-start-screen *ngIf="currentScene() === scene.Start" [@fadeIn]></app-start-screen>
     <!-- QS -->
-    <app-floor-qs *ngIf="currentScene() === scene.FloorQs"></app-floor-qs>
-    <app-desk-qs *ngIf="currentScene() === scene.DeskQS"></app-desk-qs>
-    <app-desk-qs-keyboard *ngIf="currentScene() === scene.DeskQSKeyboard"></app-desk-qs-keyboard>
+    <app-floor-qs *ngIf="currentScene() === scene.FloorQs" [@fadeIn]></app-floor-qs>
+    <app-desk-qs *ngIf="currentScene() === scene.DeskQS" [@fadeIn]></app-desk-qs>
+    <app-desk-qs-keyboard *ngIf="currentScene() === scene.DeskQSKeyboard" [@fadeIn]></app-desk-qs-keyboard>
 
     <!-- DEV 3 -->
-    <app-desk-dev-3 *ngIf="currentScene() === scene.DeskDev3"></app-desk-dev-3>
+    <app-desk-dev-3 *ngIf="currentScene() === scene.DeskDev3" [@fadeIn]></app-desk-dev-3>
 
     <!-- AC -->
-    <app-floor-ac *ngIf="currentScene() === scene.FloorAc"></app-floor-ac>
+    <app-floor-ac *ngIf="currentScene() === scene.FloorAc" [@fadeIn]></app-floor-ac>
 
     <canvas #canvas height="1080" width="1618"></canvas>
 </div>

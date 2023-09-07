@@ -7,11 +7,16 @@ import { Component, ElementRef, OnInit, ViewChild, WritableSignal  } from '@angu
 import { Scene } from './enum';
 import { createPixiApp } from './helpers';
 import { SceneService } from './services/scene.service';
+import { trigger } from '@angular/animations';
+import { fadeInAnimation } from './animations';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    animations: [
+        trigger('fadeIn', [fadeInAnimation]),
+    ],
 })
 export class AppComponent implements OnInit {
 
