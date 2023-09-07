@@ -7,6 +7,7 @@ import { Graphics, Text } from 'pixi.js';
 
 import { Scene } from '../../enum';
 import { SceneService } from '../../services/scene.service';
+import { TextService } from '../../services/text.service';
 
 @Component({
     selector: 'app-start-screen',
@@ -17,6 +18,7 @@ export class StartScreenComponent implements OnInit {
 
     public constructor(
         private sceneService: SceneService,
+        private textService: TextService,
     ) { }
 
     public ngOnInit(): void {
@@ -53,7 +55,7 @@ export class StartScreenComponent implements OnInit {
     }
 
     public async startGame(): Promise<void> {
-        this.sceneService.currentScene.set(Scene.DeskQS);
+        this.sceneService.currentScene.set(Scene.DeskQSIntro);
 
         // const audio = new Audio();
 
@@ -61,11 +63,19 @@ export class StartScreenComponent implements OnInit {
         // audio.load();
         // await audio.play();
 
-        const audioAmbience = new Audio();
+        const introText = `
+            You hear a sound and then everything went black.
+            The next thing you remember is waking up in a small office.
+            How did and you get in here?
+            And more importantly, how can you get out of here?'
+        `
+        this.textService.showText(introText, 8000);
 
-        audioAmbience.src = '../assets/audio/ambience-haunted.wav';
-        audioAmbience.load();
-        audioAmbience.loop = true;
-        await audioAmbience.play();
+        const audioIntro = new Audio();
+
+        audioIntro.src = '../assets/audio/intro.mp3';
+        audioIntro.load();
+        // audioAmbience.loop = true;
+        await audioIntro.play();
     }
 }

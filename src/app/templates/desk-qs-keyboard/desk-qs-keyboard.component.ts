@@ -51,6 +51,11 @@ export class DeskQsKeyboardComponent {
         failureAudio.src = '../../assets/audio/fail.mp3';
         failureAudio.load();
 
+        const keypressAudio = new Audio();
+
+        keypressAudio.src = '../../assets/audio/key-press.mp3'
+        keypressAudio.load();
+
         const arrow = this.createDeskQsArrow();
 
         this.sceneService.pixiApp?.stage.addChild(arrow);
@@ -60,6 +65,10 @@ export class DeskQsKeyboardComponent {
 
             keyRect.on('mouseup', () => {
                 console.log(`pressed ${key[0]}`);
+
+                keypressAudio.pause();
+                keypressAudio.currentTime = 0;
+                keypressAudio.play();
 
                 this.text = `${this.text}${key[0]}`;
                 this.text = this.text.substring(0, 9);
@@ -80,6 +89,10 @@ export class DeskQsKeyboardComponent {
 
         keyEnterRect.on('mouseup', () => {
             console.log(`pressed enter`);
+
+            keypressAudio.pause();
+            keypressAudio.currentTime = 0;
+            keypressAudio.play();
 
             if (this.text === 'cr4ftw3rk') {
                 successAudio.play() 
@@ -106,6 +119,10 @@ export class DeskQsKeyboardComponent {
 
         keyBackspaceRect.on('mouseup', () => {
             console.log(`pressed backspace`);
+
+            keypressAudio.pause();
+            keypressAudio.currentTime = 0;
+            keypressAudio.play();
 
             this.text = this.text.slice(0, -1);
         });

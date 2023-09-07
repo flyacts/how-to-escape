@@ -3,3 +3,4 @@
  */
 
 export * from './fade-in.animation';
+export * from './intro.animation';

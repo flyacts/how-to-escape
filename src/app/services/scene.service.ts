@@ -15,6 +15,7 @@ export class SceneService {
 
     public pixiApp?: PIXI.Application;
 
+    public isGameStarted = false;
     public currentScene: WritableSignal<Scene>;
 
     public isQsDeskLightOn: WritableSignal<boolean> = signal(false);

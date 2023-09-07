@@ -12,6 +12,7 @@ export enum Scene {
     DeskDevMike,
     DeskDsSascha,
     DeskQS,
+    DeskQSIntro,
     DeskQSKeyboard,
     Door,
     FloorAc,

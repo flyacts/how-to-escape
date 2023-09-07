@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { CanvasTestComponent } from './templates/canvas-test/canvas-test.component';
 import { DeskDevDanielComponent } from './templates/desk-dev-daniel/desk-dev-daniel.component';
 import { DeskQsComponent } from './templates/desk-qs/desk-qs.component';
 import { DeskQsKeyboardComponent } from './templates/desk-qs-keyboard/desk-qs-keyboard.component';
@@ -28,7 +27,6 @@ import { InventoryComponent } from './molecules/inventory/inventory.component';
 @NgModule({
     declarations: [
         AppComponent,
-        CanvasTestComponent,
         CouchComponent,
         StartScreenComponent,
         PcQsComponent,

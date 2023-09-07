@@ -5,10 +5,10 @@
 import { Component, ElementRef, OnInit, ViewChild, WritableSignal, effect  } from '@angular/core';
 
 import { Scene } from './enum';
-import { createIcon, createPixiApp } from './helpers';
+import { createPixiApp } from './helpers';
 import { SceneService } from './services/scene.service';
 import { trigger } from '@angular/animations';
-import { fadeInAnimation } from './animations';
+import { fadeInAnimation, introAnimation } from './animations';
 import { TextService } from './services/text.service';
 
 @Component({
@@ -17,6 +17,7 @@ import { TextService } from './services/text.service';
     styleUrls: ['./app.component.scss'],
     animations: [
         trigger('fadeIn', [fadeInAnimation]),
+        trigger('intro', [introAnimation])
     ],
 })
 export class AppComponent implements OnInit {
