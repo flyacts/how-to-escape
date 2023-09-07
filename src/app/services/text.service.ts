@@ -40,7 +40,7 @@ export class TextService {
      */
     public showText(
         text: string,
-        duration = 5000000,
+        duration = 5000,
     ): void {
         this.textContainer.textContent = text;
         this.textContainer.style.transition = `opacity ${this.fadeInTime}ms`;
