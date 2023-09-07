@@ -5,7 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Scene } from '../../enum';
-import { createArrow, createCircle, InteractionCircle } from '../../helpers';
+import { Arrow, createArrow, createCircle, InteractionCircle } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
@@ -20,9 +20,15 @@ export class FloorAcComponent implements OnInit{
     ) { }
 
     public ngOnInit(): void {
-        const goToDev3Desk = this.createDev3Teleport();
+        const goToDoor = this.createDoorTeleport();
+        const goToDevDeskDaniel = this.createDevDanielTeleport();
+        const goToDevDeskMike = this.createDevMikeTeleport();
+        const goToCouch = this.createCouchTarget();
 
-        this.sceneService.pixiApp?.stage.addChild(goToDev3Desk);
+        this.sceneService.pixiApp?.stage.addChild(goToCouch);        
+        this.sceneService.pixiApp?.stage.addChild(goToDoor);
+        this.sceneService.pixiApp?.stage.addChild(goToDevDeskDaniel);
+        this.sceneService.pixiApp?.stage.addChild(goToDevDeskMike);
     }
 
     public goToQsFloor(): void {
@@ -30,21 +36,76 @@ export class FloorAcComponent implements OnInit{
     }
 
     /**
-     * create clickable to dek dev 3
+     * create clickable to Daniel's desk
      */
-    public createDev3Teleport(): InteractionCircle {
-        const goToACFloor = createCircle({
+    public createDevDanielTeleport(): InteractionCircle {
+        const goToDesk = createCircle({
             x: 1400,
             y: 800,
             size: 20,
             color: 0x10ABF3,
         });
 
-        goToACFloor.onmouseup = (): void => {
-            this.sceneService.currentScene.set(Scene.DeskDev3);
+        goToDesk.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.DeskDevDaniel);
         };
 
-        return goToACFloor;
+        return goToDesk;
+    }
+
+    /**
+     * create clickable to Mike's desk
+     */
+    public createDevMikeTeleport(): InteractionCircle {
+        const goToDesk = createCircle({
+            x: 180,
+            y: 800,
+            size: 20,
+            color: 0x10ABF3,
+        });
+
+        goToDesk.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.DeskDevMike);
+        };
+
+        return goToDesk;
+    }
+
+
+    /**
+     * create arrow to door
+     */
+    public createDoorTeleport(): Arrow {
+        const arrow = createArrow({
+            tipX: 810,
+            tipY: 700,
+            color: 0x212121,
+            direction: 'top',
+            size: 100,
+            angle: 0,
+        });
+
+        arrow.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.Door);
+        };
+
+        return arrow;
+    }
+
+    public createCouchTarget(): InteractionCircle {
+        const goToCouch = createCircle({
+            x: 580,
+            y: 650,
+            color: 0x10ABF3,
+            size: 20,
+        });
+    
+        goToCouch.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.Couch);
+        };
+    
+        return goToCouch;
+
     }
 
 

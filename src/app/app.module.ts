@@ -7,7 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { CanvasTestComponent } from './templates/canvas-test/canvas-test.component';
-import { DeskDev3Component } from './templates/desk-dev-3/desk-dev-3.component';
+import { DeskDevDanielComponent } from './templates/desk-dev-daniel/desk-dev-daniel.component';
 import { DeskQsComponent } from './templates/desk-qs/desk-qs.component';
 import { DeskQsKeyboardComponent } from './templates/desk-qs-keyboard/desk-qs-keyboard.component';
 import { FloorAcComponent } from './templates/floor-ac/floor-ac.component';
@@ -15,18 +15,28 @@ import { FloorQsComponent } from './templates/floor-qs/floor-qs.component';
 import { PcQsComponent } from './templates/pc-qs/pc-qs.component';
 import { StartScreenComponent } from './templates/start-screen/start-screen.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DeskDevDanielHeadphonesComponent } from './templates/desk-dev-daniel-headphones/desk-dev-daniel-headphones.component';
+import { DoorComponent } from './templates/door/door.component';
+import { DeskDevMikeComponent } from './templates/desk-dev-mike/desk-dev-mike.component';
+import { CouchComponent } from './templates/couch/couch.component';
+import { FlymanComponent } from './templates/flyman/flyman.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         CanvasTestComponent,
+        CouchComponent,
         StartScreenComponent,
         PcQsComponent,
         DeskQsComponent,
-        DeskDev3Component,
+        DeskDevDanielComponent,
+        DeskDevDanielHeadphonesComponent,
+        DeskDevMikeComponent,
         DeskQsKeyboardComponent,
+        DoorComponent,
         FloorQsComponent,
         FloorAcComponent,
+        FlymanComponent,
     ],
     imports: [
         BrowserAnimationsModule,

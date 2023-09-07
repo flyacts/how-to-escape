@@ -5,11 +5,22 @@
     <app-desk-qs *ngIf="currentScene() === scene.DeskQS" [@fadeIn]></app-desk-qs>
     <app-desk-qs-keyboard *ngIf="currentScene() === scene.DeskQSKeyboard" [@fadeIn]></app-desk-qs-keyboard>
 
-    <!-- DEV 3 -->
-    <app-desk-dev-3 *ngIf="currentScene() === scene.DeskDev3" [@fadeIn]></app-desk-dev-3>
+    <!-- DEV -->
+    <app-desk-dev-daniel *ngIf="currentScene() === scene.DeskDevDaniel" [@fadeIn]></app-desk-dev-daniel>
+    <app-desk-dev-daniel-headphones *ngIf="currentScene() === scene.DeskDevDanielHeadphones" [@fadeIn]></app-desk-dev-daniel-headphones>
+    <app-desk-dev-mike *ngIf="currentScene() === scene.DeskDevMike" [@fadeIn]></app-desk-dev-mike>
 
     <!-- AC -->
     <app-floor-ac *ngIf="currentScene() === scene.FloorAc" [@fadeIn]></app-floor-ac>
+
+    <!-- Door -->
+    <app-door *ngIf="currentScene() === scene.Door"></app-door>
+
+    <!-- Couch -->
+    <app-couch *ngIf="currentScene() === scene.Couch"></app-couch>
+
+    <!-- Flyman -->
+    <app-flyman *ngIf="currentScene() === scene.Flyman"></app-flyman>
 
     <canvas #canvas height="1080" width="1618"></canvas>
 </div>

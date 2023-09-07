@@ -2,10 +2,10 @@
  * @copyright FLYACTS GmbH 2022
  */
 
-import { Component, ElementRef, OnInit, ViewChild, WritableSignal  } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, WritableSignal, effect  } from '@angular/core';
 
 import { Scene } from './enum';
-import { createPixiApp } from './helpers';
+import { createIcon, createPixiApp } from './helpers';
 import { SceneService } from './services/scene.service';
 import { trigger } from '@angular/animations';
 import { fadeInAnimation } from './animations';

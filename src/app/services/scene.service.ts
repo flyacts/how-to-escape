@@ -18,6 +18,7 @@ export class SceneService {
     public currentScene: WritableSignal<Scene>;
 
     public isQsDeskLightOn: WritableSignal<boolean> = signal(false);
+    public isDevDeskMikeLightOn: WritableSignal<boolean> = signal(false);
 
     private CURRENT_SCENE = 'CURRENT_SCENE';
     private FALLBACK_SCENE = 0;
