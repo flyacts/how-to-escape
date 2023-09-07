@@ -9,6 +9,7 @@ import { createIcon, createPixiApp } from './helpers';
 import { SceneService } from './services/scene.service';
 import { trigger } from '@angular/animations';
 import { fadeInAnimation } from './animations';
+import { TextService } from './services/text.service';
 
 @Component({
     selector: 'app-root',
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
 
     public constructor(
         public sceneService: SceneService,
+        public textService: TextService,
     ) { }
 
     public ngOnInit(): void {

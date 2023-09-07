@@ -1,4 +1,4 @@
-<div class="app">
+<div class="app" (click)="textService.showText('There is a sound coming from the fridge.')">
     <app-start-screen *ngIf="currentScene() === scene.Start" [@fadeIn]></app-start-screen>
     <!-- QS -->
     <app-floor-qs *ngIf="currentScene() === scene.FloorQs" [@fadeIn]></app-floor-qs>
