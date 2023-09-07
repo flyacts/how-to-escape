@@ -8,6 +8,7 @@ import { Scene } from '../../enum';
 import { Arrow, createArrow } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 import { Rectangle, createRectangle } from '../../helpers/create-rectangle.function';
+import { TextService } from '../../services/text.service';
 
 const KEYS: Map<string, { x: number, y: number }> = new Map();
 
@@ -33,6 +34,7 @@ export class DeskQsKeyboardComponent {
 
     public constructor(
         private sceneService: SceneService,
+        private textService: TextService,
     ) {
         this.iconSrc = computed(() => !this.sceneService.isQsDeskLightOn()
             ? '../../../assets/images/desk_qs_keyboard_1.png'
@@ -79,7 +81,15 @@ export class DeskQsKeyboardComponent {
         keyEnterRect.on('mouseup', () => {
             console.log(`pressed enter`);
 
-            this.text == 'cr4ftw3rk' ? successAudio.play() : failureAudio.play();
+            if (this.text === 'cr4ftw3rk') {
+                successAudio.play() 
+                this.sceneService.isFridgeLocked.set(false);
+                this.textService.showText('There was a click sound near the fridge.')
+            } else {
+                failureAudio.play();
+                this.textService.showText('Nothing happens.')
+            }
+
         });
 
         this.sceneService.pixiApp?.stage.addChild(keyEnterRect);

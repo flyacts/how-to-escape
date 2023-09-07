@@ -22,6 +22,8 @@ export class SceneService {
     public isDevDeskToniBoxOpen: WritableSignal<boolean> = signal(false);
 
     public fridgeState: WritableSignal<'closed' | 'open' | 'freezer-open'> = signal('closed');
+    public isFridgeLocked: WritableSignal<boolean> = signal(true);
+    public isFreezerLocked: WritableSignal<boolean> = signal(true);
     
     private CURRENT_SCENE = 'CURRENT_SCENE';
     private FALLBACK_SCENE = 0;

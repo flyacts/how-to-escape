@@ -3,6 +3,7 @@ import { Scene } from '../../enum';
 import { Arrow, createArrow, createIcon } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 import * as PIXI from 'pixi.js';
+import { TextService } from '../../services/text.service';
 
 @Component({
   selector: 'app-fridge',
@@ -16,6 +17,7 @@ export class FridgeComponent {
 
     public constructor(
         private sceneService: SceneService,
+        private textService: TextService,
     ) {
         this.iconSrc = computed(() => {
           if (this.sceneService.fridgeState() === 'open') {
@@ -95,7 +97,14 @@ export class FridgeComponent {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            this.sceneService.fridgeState.set('open');
+            if (!this.sceneService.isFridgeLocked()) {
+                this.sceneService.fridgeState.set('open');
+            } else {
+                this.textService.showRandomText([
+                    'It seems to be locked somehow.',
+                    `It won't budge.`,
+                ], 2000);
+            }
         };
 
         // be visible on hover
@@ -149,7 +158,14 @@ export class FridgeComponent {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            this.sceneService.fridgeState.set('freezer-open');
+            if (!this.sceneService.isFreezerLocked()) {
+                this.sceneService.fridgeState.set('freezer-open');
+            } else {
+                this.textService.showRandomText([
+                    'It seems to be locked somehow.',
+                    `It won't budge.`,
+                ], 2000);
+            }
         };
 
         // be visible on hover

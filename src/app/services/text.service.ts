@@ -67,4 +67,10 @@ export class TextService {
             )
             .subscribe();
     }
+
+    public showRandomText(texts: string[], duration?: number) {
+        const random = Math.floor(Math.random() * texts.length);
+
+        this.showText(texts[random], duration);
+    }
 }
