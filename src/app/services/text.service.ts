@@ -11,8 +11,8 @@ import { delay, tap, timer } from 'rxjs';
 })
 export class TextService {
 
-    public appContainer!: Element;
-    public textContainer: HTMLDivElement;
+    private appContainer!: Element;
+    private textContainer: HTMLDivElement;
 
     private readonly fadeInTime = 500;
     private readonly fadeOutTime = 1500;
@@ -33,6 +33,8 @@ export class TextService {
         this.textContainer.style.padding = '16px 32px';
         this.textContainer.style.background = '#111';
         this.textContainer.style.boxShadow = '0 0 30px 30px #111';
+        this.textContainer.style.pointerEvents = 'none';
+        this.textContainer.style.userSelect = 'none';
     }
 
     /**
