@@ -23,10 +23,12 @@ export class DoorComponent implements OnInit{
         const goToFloorAC = this.createFloorAcArrow();
         const goToCouch = this.createCouchTarget();
         const goToFlyman = this.createFlymanTeleport();
+        const goToFridge = this.createFridgeTarget();
 
         this.sceneService.pixiApp?.stage.addChild(goToFloorAC);
         this.sceneService.pixiApp?.stage.addChild(goToCouch);
         this.sceneService.pixiApp?.stage.addChild(goToFlyman);
+        this.sceneService.pixiApp?.stage.addChild(goToFridge);
     }
 
     /**
@@ -59,6 +61,21 @@ export class DoorComponent implements OnInit{
     
         goToCouch.onmouseup = (): void => {
             this.sceneService.currentScene.set(Scene.Couch);
+        };
+    
+        return goToCouch;
+    }
+
+    public createFridgeTarget(): InteractionCircle {
+        const goToCouch = createCircle({
+            x: 1300,
+            y: 930,
+            color: 0x10ABF3,
+            size: 20,
+        });
+    
+        goToCouch.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.Fridge);
         };
     
         return goToCouch;
