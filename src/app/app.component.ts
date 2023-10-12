@@ -8,6 +8,7 @@ import { Component, ElementRef, OnInit, ViewChild, WritableSignal  } from '@angu
 import { fadeInAnimation, introAnimation } from './animations';
 import { Scene } from './enum';
 import { createPixiApp } from './helpers';
+import { KeyboardService } from './services/keyboard.service';
 import { SceneService } from './services/scene.service';
 import { TextService } from './services/text.service';
 
@@ -31,16 +32,15 @@ export class AppComponent implements OnInit {
     public currentScene!: WritableSignal<Scene>;
 
     public constructor(
+        private keyboardService: KeyboardService,
         public sceneService: SceneService,
         public textService: TextService,
     ) { }
 
     public ngOnInit(): void {
-        console.log(this.canvas);
+        this.keyboardService.init();
 
         this.currentScene = this.sceneService.currentScene;
         this.sceneService.pixiApp = createPixiApp(this.canvas);
-
-        console.log(this.currentScene());
     }
 }

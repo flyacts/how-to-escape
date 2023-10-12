@@ -2,7 +2,11 @@
  * @copyright FLYACTS GmbH 2023
  */
 
-import { Component } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
+
+import { KeyboardService } from '../../services/keyboard.service';
 
 
 interface InventoryItemInterface {
@@ -15,7 +19,7 @@ interface InventoryItemInterface {
     templateUrl: './inventory.component.html',
     styleUrls: ['./inventory.component.scss'],
 })
-export class InventoryComponent {
+export class InventoryComponent implements OnInit {
 
     public isOpen = false;
 
@@ -34,7 +38,35 @@ export class InventoryComponent {
         },
     ];
 
+    public constructor(
+        private destroyRef: DestroyRef,
+        private keyboardService: KeyboardService,
+    ) { }
+
+    /**
+     * on init
+     */
+    public ngOnInit(): void {
+        this.initKeyboardListener();
+    }
+
     public useInventoryItem(item: InventoryItemInterface): void {
         console.log(item.name);
+    }
+
+    /**
+     * init listener that opened the inventor on "e" press
+     */
+    public initKeyboardListener(): void {
+        this.keyboardService.keyPressed$
+            .pipe(
+                filter(event => event.key === this.keyboardService.inventoryKeyPress()),
+                takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe({
+                next: () => {
+                    this.isOpen = !this.isOpen;
+                },
+            });
     }
 }

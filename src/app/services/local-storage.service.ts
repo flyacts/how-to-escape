@@ -4,13 +4,14 @@
 
 import { Injectable } from '@angular/core';
 
-import { BooleanEnum, FridgeState, Scene } from '../enum';
+import { BooleanEnum, FridgeState, LightBulbState, Scene } from '../enum';
 
 export interface LocalStorageKeys {
     CURRENT_SCENE: Scene;
     FRIDGE_STATE: FridgeState;
     IS_FREEZER_LOCKED: BooleanEnum,
     IS_FRIDGE_LOCKED: BooleanEnum,
+    LIGHT_BULB_STATE: LightBulbState,
 }
 
 @Injectable({
