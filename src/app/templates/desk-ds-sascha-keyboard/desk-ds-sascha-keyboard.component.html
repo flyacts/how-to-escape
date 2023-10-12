@@ -1,3 +1,12 @@
 <div class="scene-container">
     <img [src]="iconSrc()">
 </div>
+
+<div class="text-input-container">
+    <div class="text-input">
+        {{ text.length > 0 ? text[0] : '' }}
+    </div>
+    <div class="text-input">
+        {{ text.length > 1 ? text[1] : '' }}
+    </div>
+</div>
