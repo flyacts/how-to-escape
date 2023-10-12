@@ -30,6 +30,8 @@ export class InventoryComponent implements OnInit {
         private destroyRef: DestroyRef,
         private keyboardService: KeyboardService,
         private inventoryService: InventoryService,
+        private destroyRef: DestroyRef,
+        private keyboardService: KeyboardService,
     ) {
         this.inventory = this.inventoryService.getInventory();
     }
