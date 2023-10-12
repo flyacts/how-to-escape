@@ -12,8 +12,8 @@ import { DialogComponent } from './organisms/dialog/dialog.component';
 import { CouchComponent } from './templates/couch/couch.component';
 import { DeskDevDanielComponent } from './templates/desk-dev-daniel/desk-dev-daniel.component';
 import {
-    DeskDevDanielHeadphonesComponent,
-} from './templates/desk-dev-daniel-headphones/desk-dev-daniel-headphones.component';
+    DeskDevDanielNoHeadphonesComponent,
+} from './templates/desk-dev-daniel-no-headphones/desk-dev-daniel-no-headphones.component';
 import { DeskDevMikeComponent } from './templates/desk-dev-mike/desk-dev-mike.component';
 import { DeskDevToniComponent } from './templates/desk-dev-toni/desk-dev-toni.component';
 import { DeskDsSaschaComponent } from './templates/desk-ds-sascha/desk-ds-sascha.component';
@@ -35,7 +35,7 @@ import { StartScreenComponent } from './templates/start-screen/start-screen.comp
         StartScreenComponent,
         PcQsComponent,
         DeskDevDanielComponent,
-        DeskDevDanielHeadphonesComponent,
+        DeskDevDanielNoHeadphonesComponent,
         DeskDevMikeComponent,
         DeskDevToniComponent,
         DeskDsSaschaComponent,

@@ -44,7 +44,7 @@
         transition: width 0.5s;
 
         &.isOpen {
-            width: 500px;
+            width: fit-content;
             padding: 10px 50px 10px 100px;
             transition: width 0.5s, padding 0.5s;
 
@@ -53,6 +53,11 @@
                 transition: opacity 1s;
                 opacity: 1;
             }
+        }
+
+        p {
+            color: white;
+            width: 100px;
         }
 
         .inventory-item {
