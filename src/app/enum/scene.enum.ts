@@ -7,7 +7,7 @@ export enum Scene {
     Couch = 'couch',
     DeskAC = 'deskAc',
     DeskDevDaniel = 'deskDevDaniel',
-    DeskDevDanielHeadphones = 'deskDevDanielHeadphones',
+    DeskDevDanielNoHeadphones = 'deskDevDanielNoHeadphones',
     DeskDevToni = 'deskDevToni',
     DeskDevMike = 'deskDevMike',
     DeskDsSascha = 'deskDsSascha',

@@ -10,11 +10,11 @@ import { Arrow, createArrow, createIcon } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
-    selector: 'app-desk-dev-daniel-headphones',
-    templateUrl: './desk-dev-daniel-headphones.component.html',
-    styleUrls: ['./desk-dev-daniel-headphones.component.scss'],
+    selector: 'app-desk-dev-daniel-no-headphones',
+    templateUrl: './desk-dev-daniel-no-headphones.component.html',
+    styleUrls: ['./desk-dev-daniel-no-headphones.component.scss'],
 })
-export class DeskDevDanielHeadphonesComponent implements OnInit {
+export class DeskDevDanielNoHeadphonesComponent implements OnInit {
 
     private noise?: HTMLAudioElement;
 
@@ -37,7 +37,7 @@ export class DeskDevDanielHeadphonesComponent implements OnInit {
         this.sceneService.pixiApp?.stage.addChild(headphonesIconLeft);
         this.sceneService.pixiApp?.stage.addChild(headphonesIconRight);
 
-        this.noise = await this.playNoise();
+        // this.noise = await this.playNoise();
     }
 
     /**

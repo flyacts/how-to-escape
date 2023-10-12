@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
 import * as PIXI from 'pixi.js';
 
 import { Scene } from '../../enum';
+import { InventoryItemEnum } from '../../enum/inventory-items.enum';
 import { Arrow, createArrow, createIcon } from '../../helpers';
+import { InventoryItemInterface } from '../../interfaces/inventory-item.interface';
+import { InventoryService } from '../../services/inventory.service';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
@@ -18,6 +21,7 @@ export class DeskDevDanielComponent implements OnInit {
 
     public constructor(
         private sceneService: SceneService,
+        private inventory: InventoryService,
     ) {  }
 
     public async ngOnInit(): Promise<void> {
@@ -85,7 +89,13 @@ export class DeskDevDanielComponent implements OnInit {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            this.sceneService.currentScene.set(Scene.DeskDevDanielHeadphones);
+            const item: InventoryItemInterface = {
+                name: InventoryItemEnum.Headset,
+                imageName: 'headset.jpg',
+            };
+
+            this.inventory.addItemToInventory(item);
+            this.sceneService.currentScene.set(Scene.DeskDevDanielNoHeadphones);
         };
 
         // be visible on hover
