@@ -43,9 +43,7 @@ export class FridgeService {
         );
 
         effect(() => {
-            if (this.fridgeState()) {
-                this.localStorageService.set('FRIDGE_STATE', this.fridgeState());
-            }
+            this.localStorageService.set('FRIDGE_STATE', this.fridgeState());
         });
     }
 }
