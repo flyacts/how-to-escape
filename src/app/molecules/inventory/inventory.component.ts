@@ -8,6 +8,8 @@ import { filter } from 'rxjs';
 
 import { KeyboardService } from '../../services/keyboard.service';
 
+import { InventoryService } from '../../services/inventory.service';
+
 
 interface InventoryItemInterface {
     name: string,
@@ -23,20 +25,13 @@ export class InventoryComponent implements OnInit {
 
     public isOpen = false;
 
-    public inventory: InventoryItemInterface[] = [
-        {
-            name: 'Bananenschale',
-            imageName: 'banana.png',
-        },
-        {
-            name: 'Mate',
-            imageName: 'mate.png',
-        },
-        {
-            name: 'Ananas',
-            imageName: 'pineapple.webp',
-        },
-    ];
+    public inventory: InventoryItemInterface[] = [];
+
+    public constructor(
+        private inventoryService: InventoryService,
+    ) {
+        this.inventory = this.inventoryService.getInventory();
+    }
 
     public constructor(
         private destroyRef: DestroyRef,
