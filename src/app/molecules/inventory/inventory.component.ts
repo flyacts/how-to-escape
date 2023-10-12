@@ -27,9 +27,9 @@ export class InventoryComponent implements OnInit {
     public inventory: InventoryItemInterface[] = [];
 
     public constructor(
+        private inventoryService: InventoryService,
         private destroyRef: DestroyRef,
         private keyboardService: KeyboardService,
-        private inventoryService: InventoryService,
     ) {
         this.inventory = this.inventoryService.getInventory();
     }
