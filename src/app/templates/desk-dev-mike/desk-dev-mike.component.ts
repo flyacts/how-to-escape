@@ -8,7 +8,10 @@ import * as PIXI from 'pixi.js';
 
 import { fadeInAnimation, fadeOutAnimation } from '../../animations';
 import { LightBulbState, Scene } from '../../enum';
+import { InventoryItemEnum } from '../../enum/inventory-items.enum';
 import { Arrow, createArrow, createIcon } from '../../helpers';
+import { InventoryItemInterface } from '../../interfaces/inventory-item.interface';
+import { InventoryService } from '../../services/inventory.service';
 import { LightBulbService } from '../../services/light-bulb.service';
 import { SceneService } from '../../services/scene.service';
 import { TextService } from '../../services/text.service';
@@ -24,7 +27,7 @@ import { TextService } from '../../services/text.service';
 })
 export class DeskDevMikeComponent implements OnInit {
 
-    public iconSrc: Signal<string> = computed(() => !this.sceneService.isDevDeskMikeLightOn()
+    public imgSrc: Signal<string> = computed(() => !this.sceneService.isDevDeskMikeLightOn()
         ? '../../../assets/images/desk_dev2_1.png'
         : '../../../assets/images/desk_dev2_2.png',
     );
@@ -39,6 +42,7 @@ export class DeskDevMikeComponent implements OnInit {
         private lightBulbService: LightBulbService,
         private sceneService: SceneService,
         private textService: TextService,
+        private inventoryService: InventoryService,
     ) { }
 
     /**
@@ -85,6 +89,12 @@ export class DeskDevMikeComponent implements OnInit {
 
         // unscrew lamp and put it in inventory
         if (index === 1) {
+            const item: InventoryItemInterface = {
+                name: InventoryItemEnum.Lightbulb,
+                imageName: 'banana.png',
+            };
+
+            this.inventoryService.addItemToInventory(item);
             this.textService.showText('Picked up light bulb.', 2000);
             this.sceneService.isDevDeskMikeLightOn.set(false);
             this.lightBulbService.lightBulbState.set(LightBulbState.InInventory);
