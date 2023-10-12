@@ -22,7 +22,7 @@ export class FridgeService {
     ) {
         this.isFridgeLocked = signal(
             this.localStorageService.get('IS_FRIDGE_LOCKED') === BooleanEnum.True
-            || this.localStorageService.get('IS_FRIDGE_LOCKED') === BooleanEnum.True,
+            || this.localStorageService.get('IS_FRIDGE_LOCKED') === null,
         );
 
         effect(() => {
