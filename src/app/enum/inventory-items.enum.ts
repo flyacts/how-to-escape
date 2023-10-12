@@ -6,4 +6,5 @@ export enum InventoryItemEnum {
     Headset = 'headset',
     Lightbulb = 'lightbulb',
     Mate = 'mate',
+    Transponder = 'transponder',
 }

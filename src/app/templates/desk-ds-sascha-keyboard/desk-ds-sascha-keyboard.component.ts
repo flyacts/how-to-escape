@@ -7,8 +7,10 @@ import { Component, computed, Signal, signal } from '@angular/core';
 import { Scene } from '../../enum';
 import { Arrow, createArrow  } from '../../helpers';
 import { createRectangle, Rectangle } from '../../helpers/create-rectangle.function';
+import { InventoryService } from '../../services/inventory.service';
 import { SceneService } from '../../services/scene.service';
 import { TextService } from '../../services/text.service';
+import { InventoryItemEnum } from 'src/app/enum/inventory-items.enum';
 
 const KEYS: Map<string, { x: number, y: number }> = new Map();
 
@@ -36,6 +38,7 @@ export class DeskDsSaschaKeyboardComponent {
     public constructor(
         private sceneService: SceneService,
         private textService: TextService,
+        private inventoryService: InventoryService,
     ) {
         this.iconSrc = computed(() => './../../../assets/images/desk_ds_keyboard.png');
     }
@@ -97,6 +100,10 @@ export class DeskDsSaschaKeyboardComponent {
             if (this.text === '42') {
                 await successAudio.play();
                 this.textService.showText('You found a transponder. For what?');
+                this.inventoryService.addItemToInventory({
+                    name: InventoryItemEnum.Transponder,
+                    imageName: 'transponder.png',
+                });
             } else {
                 await failureAudio.play();
                 this.textService.showText('Nothing happens.');

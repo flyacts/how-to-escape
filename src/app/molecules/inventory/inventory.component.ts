@@ -6,9 +6,8 @@ import { Component, DestroyRef, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 
-import { KeyboardService } from '../../services/keyboard.service';
-
 import { InventoryService } from '../../services/inventory.service';
+import { KeyboardService } from '../../services/keyboard.service';
 
 
 interface InventoryItemInterface {
@@ -28,15 +27,12 @@ export class InventoryComponent implements OnInit {
     public inventory: InventoryItemInterface[] = [];
 
     public constructor(
+        private destroyRef: DestroyRef,
+        private keyboardService: KeyboardService,
         private inventoryService: InventoryService,
     ) {
         this.inventory = this.inventoryService.getInventory();
     }
-
-    public constructor(
-        private destroyRef: DestroyRef,
-        private keyboardService: KeyboardService,
-    ) { }
 
     /**
      * on init
