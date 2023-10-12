@@ -1,5 +1,5 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
 import { Graphics } from 'pixi.js';

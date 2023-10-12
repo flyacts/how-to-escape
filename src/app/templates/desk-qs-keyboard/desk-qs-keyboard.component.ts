@@ -1,13 +1,13 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
 import { Component, computed, Signal } from '@angular/core';
 
 import { Scene } from '../../enum';
 import { Arrow, createArrow } from '../../helpers';
+import { createRectangle, Rectangle } from '../../helpers/create-rectangle.function';
 import { SceneService } from '../../services/scene.service';
-import { Rectangle, createRectangle } from '../../helpers/create-rectangle.function';
 import { TextService } from '../../services/text.service';
 
 const KEYS: Map<string, { x: number, y: number }> = new Map();
@@ -53,7 +53,7 @@ export class DeskQsKeyboardComponent {
 
         const keypressAudio = new Audio();
 
-        keypressAudio.src = '../../assets/audio/key-press.mp3'
+        keypressAudio.src = '../../assets/audio/key-press.mp3';
         keypressAudio.load();
 
         const arrow = this.createDeskQsArrow();
@@ -63,12 +63,12 @@ export class DeskQsKeyboardComponent {
         for (const key of KEYS.entries()) {
             const keyRect = this.createKeyRect(key[1].x, key[1].y);
 
-            keyRect.on('mouseup', () => {
+            keyRect.on('mouseup', async () => {
                 console.log(`pressed ${key[0]}`);
 
                 keypressAudio.pause();
                 keypressAudio.currentTime = 0;
-                keypressAudio.play();
+                await keypressAudio.play();
 
                 this.text = `${this.text}${key[0]}`;
                 this.text = this.text.substring(0, 9);
@@ -87,20 +87,20 @@ export class DeskQsKeyboardComponent {
             alpha: 0,
         });
 
-        keyEnterRect.on('mouseup', () => {
+        keyEnterRect.on('mouseup', async () => {
             console.log(`pressed enter`);
 
             keypressAudio.pause();
             keypressAudio.currentTime = 0;
-            keypressAudio.play();
+            await keypressAudio.play();
 
             if (this.text === 'cr4ftw3rk') {
-                successAudio.play() 
+                await successAudio.play();
                 this.sceneService.isFridgeLocked.set(false);
-                this.textService.showText('There was a click sound near the fridge.')
+                this.textService.showText('There was a click sound near the fridge.');
             } else {
-                failureAudio.play();
-                this.textService.showText('Nothing happens.')
+                await failureAudio.play();
+                this.textService.showText('Nothing happens.');
             }
 
         });
@@ -117,12 +117,12 @@ export class DeskQsKeyboardComponent {
             alpha: 0,
         });
 
-        keyBackspaceRect.on('mouseup', () => {
+        keyBackspaceRect.on('mouseup', async () => {
             console.log(`pressed backspace`);
 
             keypressAudio.pause();
             keypressAudio.currentTime = 0;
-            keypressAudio.play();
+            await keypressAudio.play();
 
             this.text = this.text.slice(0, -1);
         });
@@ -154,7 +154,7 @@ export class DeskQsKeyboardComponent {
      * create arrow to deskQs
      */
     public createKeyRect(x: number, y: number): Rectangle {
-        const keyRect = createRectangle({
+        return createRectangle({
             x,
             y,
             color: 0x212121,
@@ -163,7 +163,5 @@ export class DeskQsKeyboardComponent {
             angle: 0,
             alpha: 0,
         });
-
-        return keyRect;
     }
 }

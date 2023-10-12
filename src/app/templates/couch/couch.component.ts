@@ -1,11 +1,11 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
 import { Component, OnInit } from '@angular/core';
 
 import { Scene } from '../../enum';
-import { Arrow, createArrow, createCircle, InteractionCircle } from '../../helpers';
+import { Arrow, createArrow } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 
 @Component({

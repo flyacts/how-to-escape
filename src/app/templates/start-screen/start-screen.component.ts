@@ -1,5 +1,5 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -70,7 +70,8 @@ export class StartScreenComponent implements OnInit {
             The next thing you remember is waking up in a small office.
             How did and you get in here?
             And more importantly, how can you get out of here?'
-        `
+        `;
+
         this.textService.showText(introText, duration);
 
         const audioIntro = new Audio();

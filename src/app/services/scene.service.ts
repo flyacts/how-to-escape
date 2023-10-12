@@ -1,5 +1,5 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
 import { effect, Injectable, signal, WritableSignal } from '@angular/core';
@@ -27,10 +27,9 @@ export class SceneService {
     public isFreezerLocked: WritableSignal<boolean> = signal(true);
 
     public showInventory: WritableSignal<boolean> = signal(false);
-    
+
     private CURRENT_SCENE = 'CURRENT_SCENE';
     private FALLBACK_SCENE = 0;
-
 
     public constructor() {
         this.currentScene = signal(this.getCurrentScene());

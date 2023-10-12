@@ -1,7 +1,11 @@
-import * as PIXI from 'pixi.js';
-import { WritableSignal } from "@angular/core";
+/*!
+ * @copyright FLYACTS GmbH 2023
+ */
 
-import { createIcon } from "./create-icon.function";
+import { WritableSignal } from '@angular/core';
+import * as PIXI from 'pixi.js';
+
+import { createIcon } from './create-icon.function';
 
 
 /**

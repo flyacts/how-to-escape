@@ -1,12 +1,17 @@
-import { Component, Signal, computed, signal } from '@angular/core';
+/*!
+ * @copyright FLYACTS GmbH 2023
+ */
+
+import { Component, Signal, signal } from '@angular/core';
+
 import { Scene } from '../../enum';
-import { Arrow, createArrow, createIcon } from '../../helpers';
+import { Arrow, createArrow } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
-  selector: 'app-desk-ds-sascha',
-  templateUrl: './desk-ds-sascha.component.html',
-  styleUrls: ['./desk-ds-sascha.component.scss']
+    selector: 'app-desk-ds-sascha',
+    templateUrl: './desk-ds-sascha.component.html',
+    styleUrls: ['./desk-ds-sascha.component.scss'],
 })
 export class DeskDsSaschaComponent {
 
@@ -18,7 +23,7 @@ export class DeskDsSaschaComponent {
         this.iconSrc = signal('../../../assets/images/desk_ds_1.png');
     }
 
-    public async ngOnInit(): Promise<void> {
+    public ngOnInit(): void {
         const toDeskDevToni = this.createDeskDevToniArrow();
 
         this.sceneService.pixiApp?.stage.addChild(toDeskDevToni);

@@ -1,17 +1,23 @@
-import { Component, Signal, computed, effect } from '@angular/core';
+/*!
+ * @copyright FLYACTS GmbH 2023
+ */
+
+import { Component, computed, effect, Signal } from '@angular/core';
+import * as PIXI from 'pixi.js';
+
 import { Scene } from '../../enum';
 import { Arrow, createArrow, createIcon } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
-import * as PIXI from 'pixi.js';
 import { TextService } from '../../services/text.service';
 
+/* eslint-disable sonarjs/no-duplicate-string */
+
 @Component({
-  selector: 'app-fridge',
-  templateUrl: './fridge.component.html',
-  styleUrls: ['./fridge.component.scss']
+    selector: 'app-fridge',
+    templateUrl: './fridge.component.html',
+    styleUrls: ['./fridge.component.scss'],
 })
 export class FridgeComponent {
-
 
     public iconSrc: Signal<string>;
 
@@ -20,27 +26,27 @@ export class FridgeComponent {
         private textService: TextService,
     ) {
         this.iconSrc = computed(() => {
-          if (this.sceneService.fridgeState() === 'open') {
-            return '../../../assets/images/fridge_open.png'
-          }
-          if (this.sceneService.fridgeState() === 'freezer-open') {
-            return '../../../assets/images/fridge_open_freezer.png'
-          }
+            if (this.sceneService.fridgeState() === 'open') {
+                return '../../../assets/images/fridge_open.png';
+            }
+            if (this.sceneService.fridgeState() === 'freezer-open') {
+                return '../../../assets/images/fridge_open_freezer.png';
+            }
 
-          return '../../../assets/images/fridge.png'
+            return '../../../assets/images/fridge.png';
         });
 
-        effect(() => {
+        effect(async () => {
             // redraw to update icons for fridge state
             if (this.sceneService.fridgeState()) {
                 this.sceneService.clear();
-                this.draw();
+                await this.draw();
             }
         });
     }
 
     public async ngOnInit(): Promise<void> {
-        this.draw();
+        await this.draw();
     }
 
     /**
@@ -66,7 +72,7 @@ export class FridgeComponent {
     /**
      * draw scene contents
      */
-    private async draw() {
+    private async draw(): Promise<void> {
         const toFloor = this.createFloorArrow();
 
         this.sceneService.pixiApp?.stage.addChild(toFloor);
@@ -74,7 +80,7 @@ export class FridgeComponent {
         const fridgeIcon = this.sceneService.fridgeState() === 'closed'
             ? await this.createFridgeOpenIcon()
             : await this.createFridgeCloseIcon();
-    
+
         this.sceneService.pixiApp?.stage.addChild(fridgeIcon);
 
         if (this.sceneService.fridgeState() !== 'closed') {

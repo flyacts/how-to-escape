@@ -1,8 +1,8 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
-import { Graphics, Point } from 'pixi.js';
+import { Graphics } from 'pixi.js';
 
 interface RectangleData {
     x: number;
