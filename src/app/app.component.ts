@@ -1,14 +1,14 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
-import { Component, ElementRef, OnInit, ViewChild, WritableSignal, effect  } from '@angular/core';
+import { trigger } from '@angular/animations';
+import { Component, ElementRef, OnInit, ViewChild, WritableSignal  } from '@angular/core';
 
+import { fadeInAnimation, introAnimation } from './animations';
 import { Scene } from './enum';
 import { createPixiApp } from './helpers';
 import { SceneService } from './services/scene.service';
-import { trigger } from '@angular/animations';
-import { fadeInAnimation, introAnimation } from './animations';
 import { TextService } from './services/text.service';
 
 @Component({
@@ -17,7 +17,7 @@ import { TextService } from './services/text.service';
     styleUrls: ['./app.component.scss'],
     animations: [
         trigger('fadeIn', [fadeInAnimation]),
-        trigger('intro', [introAnimation])
+        trigger('intro', [introAnimation]),
     ],
 })
 export class AppComponent implements OnInit {
@@ -36,7 +36,11 @@ export class AppComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
+        console.log(this.canvas);
+
         this.currentScene = this.sceneService.currentScene;
         this.sceneService.pixiApp = createPixiApp(this.canvas);
+
+        console.log(this.currentScene());
     }
 }

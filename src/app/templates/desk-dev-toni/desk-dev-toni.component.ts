@@ -1,13 +1,18 @@
-import { Component, Signal, computed, effect } from '@angular/core';
-import { SceneService } from '../../services/scene.service';
-import { Arrow, createArrow, createIcon } from '../../helpers';
-import { Scene } from '../../enum';
+/*!
+ * @copyright FLYACTS GmbH 2023
+ */
+
+import { Component, computed, effect, Signal } from '@angular/core';
 import * as PIXI from 'pixi.js';
 
+import { Scene } from '../../enum';
+import { Arrow, createArrow, createIcon } from '../../helpers';
+import { SceneService } from '../../services/scene.service';
+
 @Component({
-  selector: 'app-desk-dev-toni',
-  templateUrl: './desk-dev-toni.component.html',
-  styleUrls: ['./desk-dev-toni.component.scss']
+    selector: 'app-desk-dev-toni',
+    templateUrl: './desk-dev-toni.component.html',
+    styleUrls: ['./desk-dev-toni.component.scss'],
 })
 export class DeskDevToniComponent {
 
@@ -21,18 +26,19 @@ export class DeskDevToniComponent {
             : '../../../assets/images/desk_dev1_2.png',
         );
 
-        effect(() => {
+        effect(async () => {
             console.log('redraw');
             // redraw to clear search icon for box
             if (this.sceneService.isDevDeskToniBoxOpen()) {
                 this.sceneService.clear();
-                this.draw();
+
+                await this.draw();
             }
         });
     }
 
     public async ngOnInit(): Promise<void> {
-        this.draw();
+        await this.draw();
     }
 
     /**
@@ -78,7 +84,7 @@ export class DeskDevToniComponent {
     /**
      * draw scene contents
      */
-    private async draw() {
+    private async draw(): Promise<void> {
         const toDoor = this.createFloorArrow();
         const toDeskDsSascha = this.createDeskDSArrow();
 
@@ -87,6 +93,7 @@ export class DeskDevToniComponent {
 
         if (!this.sceneService.isDevDeskToniBoxOpen()) {
             const boxIcon = await this.createBoxIcon();
+
             this.sceneService.pixiApp?.stage.addChild(boxIcon);
         }
     }

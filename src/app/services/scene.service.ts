@@ -1,11 +1,12 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
 import { effect, Injectable, signal, WritableSignal } from '@angular/core';
 import * as PIXI from 'pixi.js';
 
 import { Scene } from '../enum';
+import { LocalStorageService } from './local-storage.service';
 
 
 @Injectable({
@@ -27,13 +28,13 @@ export class SceneService {
     public isFreezerLocked: WritableSignal<boolean> = signal(true);
 
     public showInventory: WritableSignal<boolean> = signal(false);
-    
-    private CURRENT_SCENE = 'CURRENT_SCENE';
-    private FALLBACK_SCENE = 0;
 
+    public constructor(
+        private localStorageService: LocalStorageService,
+    ) {
+        const currentScene = this.getCurrentSceneOnGameStart();
 
-    public constructor() {
-        this.currentScene = signal(this.getCurrentScene());
+        this.currentScene = signal(currentScene);
 
         if (this.currentScene() !== Scene.Start) {
             this.showInventory.set(true);
@@ -41,7 +42,7 @@ export class SceneService {
 
         effect(() => {
             this.clear();
-            localStorage.setItem(this.CURRENT_SCENE, this.currentScene().toString());
+            this.localStorageService.set('CURRENT_SCENE', this.currentScene());
         });
 
         // initialize and play audio when desk qs lamp is turned on
@@ -65,11 +66,21 @@ export class SceneService {
     }
 
     /**
-     * get the current scene
+     * get current scene at the start of the game
      */
-    private getCurrentScene(): Scene {
-        const scene = localStorage.getItem(this.CURRENT_SCENE);
+    private getCurrentSceneOnGameStart(): Scene {
+        const currentScene = this.localStorageService.get('CURRENT_SCENE');
 
-        return scene ? +scene : this.FALLBACK_SCENE;
+        // no scene means game was not started yet --> use start scene
+        if (currentScene === null) {
+            return Scene.Start;
+        }
+
+        // prevents loading the intro again, when reloading the window
+        if (currentScene === Scene.DeskQSIntro) {
+            return Scene.DeskQS;
+        }
+
+        return currentScene;
     }
 }

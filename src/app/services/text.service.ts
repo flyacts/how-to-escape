@@ -1,9 +1,9 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
 import { Injectable } from '@angular/core';
-import { Subject, delay, takeUntil, tap, timer } from 'rxjs';
+import { delay, Subject, takeUntil, tap, timer } from 'rxjs';
 
 
 @Injectable({
@@ -47,13 +47,14 @@ export class TextService {
         text: string,
         duration = 5000,
     ): void {
+        this.setAppContainer();
+
         // prevent multiple notification stacking
         this.trigger$.next();
 
         this.textContainer.textContent = text;
         this.textContainer.style.transition = `opacity ${this.fadeInTime}ms`;
 
-        this.appContainer = document.querySelector('.app')!;
         this.appContainer.appendChild(this.textContainer);
 
         timer(1)
@@ -79,7 +80,7 @@ export class TextService {
     /**
      * do show text, but with a random text out of `texts`
      */
-    public showRandomText(texts: string[], duration?: number) {
+    public showRandomText(texts: string[], duration?: number): void {
         const random = Math.floor(Math.random() * texts.length);
 
         this.showText(texts[random], duration);
@@ -91,10 +92,19 @@ export class TextService {
     private dismissExistingText(): void {
         const existingText = document.querySelector('.notification-text');
 
-        console.log(existingText);
-
         if (existingText) {
             this.appContainer.removeChild(existingText);
+        }
+    }
+
+    /**
+     * set app container
+     */
+    private setAppContainer(): void {
+        const appContainer = document.querySelector('.app');
+
+        if (!this.appContainer && appContainer) {
+            this.appContainer = appContainer;
         }
     }
 }

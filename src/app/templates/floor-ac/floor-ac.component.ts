@@ -1,5 +1,5 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +13,7 @@ import { SceneService } from '../../services/scene.service';
     templateUrl: './floor-ac.component.html',
     styleUrls: ['./floor-ac.component.scss'],
 })
-export class FloorAcComponent implements OnInit{
+export class FloorAcComponent implements OnInit {
 
     public constructor(
         private sceneService: SceneService,
@@ -27,7 +27,7 @@ export class FloorAcComponent implements OnInit{
         const goToCouch = this.createCouchTarget();
         const goToFridge = this.createFridgeTarget();
 
-        this.sceneService.pixiApp?.stage.addChild(goToCouch);        
+        this.sceneService.pixiApp?.stage.addChild(goToCouch);
         this.sceneService.pixiApp?.stage.addChild(goToDoor);
         this.sceneService.pixiApp?.stage.addChild(goToFridge);
         this.sceneService.pixiApp?.stage.addChild(goToDevDeskDaniel);
@@ -121,11 +121,11 @@ export class FloorAcComponent implements OnInit{
             color: 0x10ABF3,
             size: 20,
         });
-    
+
         goToCouch.onmouseup = (): void => {
             this.sceneService.currentScene.set(Scene.Couch);
         };
-    
+
         return goToCouch;
     }
 
@@ -136,11 +136,11 @@ export class FloorAcComponent implements OnInit{
             color: 0x10ABF3,
             size: 20,
         });
-    
+
         goToFridge.onmouseup = (): void => {
             this.sceneService.currentScene.set(Scene.Fridge);
         };
-    
+
         return goToFridge;
     }
 

@@ -1,18 +1,23 @@
-import { Component, OnInit, Signal, computed } from '@angular/core';
-import { SceneService } from '../../services/scene.service';
-import { Arrow, createArrow, createIcon, createLampIcon } from '../../helpers';
+/*!
+ * @copyright FLYACTS GmbH 2023
+ */
+
+import { Component, computed, OnInit, Signal } from '@angular/core';
+
 import { Scene } from '../../enum';
+import { Arrow, createArrow, createLampIcon } from '../../helpers';
+import { SceneService } from '../../services/scene.service';
 
 @Component({
-  selector: 'app-desk-dev-mike',
-  templateUrl: './desk-dev-mike.component.html',
-  styleUrls: ['./desk-dev-mike.component.scss']
+    selector: 'app-desk-dev-mike',
+    templateUrl: './desk-dev-mike.component.html',
+    styleUrls: ['./desk-dev-mike.component.scss'],
 })
 export class DeskDevMikeComponent implements OnInit {
 
     public iconSrc: Signal<string> = computed(() => !this.sceneService.isDevDeskMikeLightOn()
-            ? '../../../assets/images/desk_dev2_1.png'
-            : '../../../assets/images/desk_dev2_2.png',
+        ? '../../../assets/images/desk_dev2_1.png'
+        : '../../../assets/images/desk_dev2_2.png',
     );
 
     public constructor(

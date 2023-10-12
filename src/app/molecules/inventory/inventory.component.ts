@@ -1,12 +1,9 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Scene } from '../../enum';
-import { Arrow, createArrow, createCircle, InteractionCircle } from '../../helpers';
-import { SceneService } from '../../services/scene.service';
 
 interface InventoryItemInterface {
     name: string,
@@ -34,16 +31,10 @@ export class InventoryComponent {
         {
             name: 'Ananas',
             imageName: 'pineapple.webp',
-        }
-    ]
+        },
+    ];
 
-    public constructor(
-
-    ) { }
-
-
-    public useInventoryItem(item: InventoryItemInterface) {
+    public useInventoryItem(item: InventoryItemInterface): void {
         console.log(item.name);
     }
-
 }

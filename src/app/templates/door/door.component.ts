@@ -1,5 +1,5 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +13,7 @@ import { SceneService } from '../../services/scene.service';
     templateUrl: './door.component.html',
     styleUrls: ['./door.component.scss'],
 })
-export class DoorComponent implements OnInit{
+export class DoorComponent implements OnInit {
 
     public constructor(
         private sceneService: SceneService,
@@ -58,11 +58,11 @@ export class DoorComponent implements OnInit{
             color: 0x10ABF3,
             size: 20,
         });
-    
+
         goToCouch.onmouseup = (): void => {
             this.sceneService.currentScene.set(Scene.Couch);
         };
-    
+
         return goToCouch;
     }
 
@@ -73,11 +73,11 @@ export class DoorComponent implements OnInit{
             color: 0x10ABF3,
             size: 20,
         });
-    
+
         goToCouch.onmouseup = (): void => {
             this.sceneService.currentScene.set(Scene.Fridge);
         };
-    
+
         return goToCouch;
     }
 

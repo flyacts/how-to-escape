@@ -1,5 +1,5 @@
 /*!
- * @copyright FLYACTS GmbH 2022
+ * @copyright FLYACTS GmbH 2023
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -16,11 +16,11 @@ import { SceneService } from '../../services/scene.service';
 })
 export class DeskDevDanielHeadphonesComponent implements OnInit {
 
-    private noise?:HTMLAudioElement;
+    private noise?: HTMLAudioElement;
 
     public constructor(
         private sceneService: SceneService,
-    ) {  }
+    ) { }
 
     public async ngOnInit(): Promise<void> {
         const leaveDeskToQs = this.createFloorQsArrow();
@@ -31,8 +31,8 @@ export class DeskDevDanielHeadphonesComponent implements OnInit {
 
         this.sceneService.pixiApp?.stage.addChild(leaveDeskToAc);
 
-        const headphonesIconLeft = await this.createHeadphonesIcon(140,460);
-        const headphonesIconRight = await this.createHeadphonesIcon(1360,460);
+        const headphonesIconLeft = await this.createHeadphonesIcon(140, 460);
+        const headphonesIconRight = await this.createHeadphonesIcon(1360, 460);
 
         this.sceneService.pixiApp?.stage.addChild(headphonesIconLeft);
         this.sceneService.pixiApp?.stage.addChild(headphonesIconRight);
@@ -83,10 +83,22 @@ export class DeskDevDanielHeadphonesComponent implements OnInit {
         return leaveDesk;
     }
 
+    public async playNoise(): Promise<HTMLAudioElement> {
+        // TODO: use a audio file with a riddle
+        const noise = new Audio();
+
+        noise.src = '../assets/audio/noise.mp3';
+        noise.load();
+        noise.loop = true;
+        await noise.play();
+
+        return noise;
+    }
+
     /**
      * create headphones off icon
      */
-     private async createHeadphonesIcon(x: number, y: number): Promise<PIXI.Sprite> {
+    private async createHeadphonesIcon(x: number, y: number): Promise<PIXI.Sprite> {
         const sprite = await createIcon('../../../assets/icons/headphones_off.svg', x, y);
 
         // be initially invisible
@@ -109,17 +121,5 @@ export class DeskDevDanielHeadphonesComponent implements OnInit {
         };
 
         return sprite;
-    }
-
-    public async playNoise(): Promise<HTMLAudioElement> {
-        // placeholder whitenoise for a riddle
-        const noise = new Audio();
-
-        noise.src = '../assets/audio/noise.mp3';
-        noise.load();
-        noise.loop = true;
-        await noise.play();
-
-        return noise;
     }
 }
