@@ -3,7 +3,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { delay, tap, timer } from 'rxjs';
+import { Subject, delay, takeUntil, tap, timer } from 'rxjs';
 
 
 @Injectable({
@@ -17,9 +17,12 @@ export class TextService {
     private readonly fadeInTime = 500;
     private readonly fadeOutTime = 1500;
 
+    private trigger$ = new Subject<void>();
+
     public constructor() {
         this.textContainer = document.createElement('div');
 
+        this.textContainer.classList.add('notification-text');
         this.textContainer.style.position = 'absolute';
         this.textContainer.style.transform = 'translateX(-50%)';
         this.textContainer.style.bottom = '50px';
@@ -44,6 +47,9 @@ export class TextService {
         text: string,
         duration = 5000,
     ): void {
+        // prevent multiple notification stacking
+        this.trigger$.next();
+
         this.textContainer.textContent = text;
         this.textContainer.style.transition = `opacity ${this.fadeInTime}ms`;
 
@@ -62,15 +68,33 @@ export class TextService {
                 }),
                 delay(this.fadeOutTime),
                 tap(() => {
-                    this.appContainer.removeChild(this.textContainer);
+                    this.dismissExistingText();
                 }),
+                // prevent multiple notification stacking
+                takeUntil(this.trigger$),
             )
             .subscribe();
     }
 
+    /**
+     * do show text, but with a random text out of `texts`
+     */
     public showRandomText(texts: string[], duration?: number) {
         const random = Math.floor(Math.random() * texts.length);
 
         this.showText(texts[random], duration);
+    }
+
+    /**
+     * dismiss hide existing text if any exist
+     */
+    private dismissExistingText(): void {
+        const existingText = document.querySelector('.notification-text');
+
+        console.log(existingText);
+
+        if (existingText) {
+            this.appContainer.removeChild(existingText);
+        }
     }
 }
