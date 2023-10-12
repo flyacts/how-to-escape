@@ -25,6 +25,8 @@ export class SceneService {
     public fridgeState: WritableSignal<'closed' | 'open' | 'freezer-open'> = signal('closed');
     public isFridgeLocked: WritableSignal<boolean> = signal(true);
     public isFreezerLocked: WritableSignal<boolean> = signal(true);
+
+    public showInventory: WritableSignal<boolean> = signal(false);
     
     private CURRENT_SCENE = 'CURRENT_SCENE';
     private FALLBACK_SCENE = 0;
@@ -32,6 +34,10 @@ export class SceneService {
 
     public constructor() {
         this.currentScene = signal(this.getCurrentScene());
+
+        if (this.currentScene() !== Scene.Start) {
+            this.showInventory.set(true);
+        }
 
         effect(() => {
             this.clear();

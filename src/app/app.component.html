@@ -33,5 +33,5 @@
 
     <canvas #canvas height="1080" width="1618"></canvas>
 
-    <app-inventory></app-inventory>
+    <app-inventory *ngIf="sceneService.showInventory()" [@fadeIn]></app-inventory>
 </div>

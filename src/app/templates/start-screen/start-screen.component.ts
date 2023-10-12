@@ -63,13 +63,15 @@ export class StartScreenComponent implements OnInit {
         // audio.load();
         // await audio.play();
 
+        const duration = 8000;
+
         const introText = `
             You hear a sound and then everything went black.
             The next thing you remember is waking up in a small office.
             How did and you get in here?
             And more importantly, how can you get out of here?'
         `
-        this.textService.showText(introText, 8000);
+        this.textService.showText(introText, duration);
 
         const audioIntro = new Audio();
 
@@ -77,5 +79,9 @@ export class StartScreenComponent implements OnInit {
         audioIntro.load();
         // audioAmbience.loop = true;
         await audioIntro.play();
+
+        setTimeout(() => {
+            this.sceneService.showInventory.set(true);
+        }, duration);
     }
 }
