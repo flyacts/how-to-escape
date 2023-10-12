@@ -5,12 +5,12 @@
 import { Component, computed, Signal, signal } from '@angular/core';
 
 import { Scene } from '../../enum';
+import { InventoryItemEnum } from '../../enum/inventory-items.enum';
 import { Arrow, createArrow  } from '../../helpers';
 import { createRectangle, Rectangle } from '../../helpers/create-rectangle.function';
 import { InventoryService } from '../../services/inventory.service';
 import { SceneService } from '../../services/scene.service';
 import { TextService } from '../../services/text.service';
-import { InventoryItemEnum } from 'src/app/enum/inventory-items.enum';
 
 const KEYS: Map<string, { x: number, y: number }> = new Map();
 
