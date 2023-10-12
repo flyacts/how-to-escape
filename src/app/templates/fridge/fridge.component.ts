@@ -5,8 +5,9 @@
 import { Component, computed, effect, Signal } from '@angular/core';
 import * as PIXI from 'pixi.js';
 
-import { Scene } from '../../enum';
+import { FridgeState, Scene } from '../../enum';
 import { Arrow, createArrow, createIcon } from '../../helpers';
+import { FridgeService } from '../../services/fridge.service';
 import { SceneService } from '../../services/scene.service';
 import { TextService } from '../../services/text.service';
 
@@ -22,14 +23,15 @@ export class FridgeComponent {
     public iconSrc: Signal<string>;
 
     public constructor(
+        private fridgeService: FridgeService,
         private sceneService: SceneService,
         private textService: TextService,
     ) {
         this.iconSrc = computed(() => {
-            if (this.sceneService.fridgeState() === 'open') {
+            if (this.fridgeService.state() === FridgeState.Opened) {
                 return '../../../assets/images/fridge_open.png';
             }
-            if (this.sceneService.fridgeState() === 'freezer-open') {
+            if (this.fridgeService.state() === FridgeState.FreezerOpened) {
                 return '../../../assets/images/fridge_open_freezer.png';
             }
 
@@ -38,7 +40,7 @@ export class FridgeComponent {
 
         effect(async () => {
             // redraw to update icons for fridge state
-            if (this.sceneService.fridgeState()) {
+            if (this.fridgeService.state()) {
                 this.sceneService.clear();
                 await this.draw();
             }

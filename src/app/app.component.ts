@@ -36,7 +36,11 @@ export class AppComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
+        console.log(this.canvas);
+
         this.currentScene = this.sceneService.currentScene;
         this.sceneService.pixiApp = createPixiApp(this.canvas);
+
+        console.log(this.currentScene());
     }
 }
