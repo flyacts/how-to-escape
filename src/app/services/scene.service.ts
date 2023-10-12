@@ -23,10 +23,6 @@ export class SceneService {
     public isDevDeskMikeLightOn: WritableSignal<boolean> = signal(false);
     public isDevDeskToniBoxOpen: WritableSignal<boolean> = signal(false);
 
-    public fridgeState: WritableSignal<'closed' | 'open' | 'freezer-open'> = signal('closed');
-    public isFridgeLocked: WritableSignal<boolean> = signal(true);
-    public isFreezerLocked: WritableSignal<boolean> = signal(true);
-
     public showInventory: WritableSignal<boolean> = signal(false);
 
     public constructor(

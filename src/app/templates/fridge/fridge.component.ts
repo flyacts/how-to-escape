@@ -28,10 +28,10 @@ export class FridgeComponent {
         private textService: TextService,
     ) {
         this.iconSrc = computed(() => {
-            if (this.fridgeService.state() === FridgeState.Opened) {
+            if (this.fridgeService.fridgeState() === FridgeState.FridgeOpened) {
                 return '../../../assets/images/fridge_open.png';
             }
-            if (this.fridgeService.state() === FridgeState.FreezerOpened) {
+            if (this.fridgeService.fridgeState() === FridgeState.FreezerOpened) {
                 return '../../../assets/images/fridge_open_freezer.png';
             }
 
@@ -40,7 +40,7 @@ export class FridgeComponent {
 
         effect(async () => {
             // redraw to update icons for fridge state
-            if (this.fridgeService.state()) {
+            if (this.fridgeService.fridgeState()) {
                 this.sceneService.clear();
                 await this.draw();
             }
@@ -76,17 +76,18 @@ export class FridgeComponent {
      */
     private async draw(): Promise<void> {
         const toFloor = this.createFloorArrow();
+        const isFridgeClosed = this.fridgeService.fridgeState() === FridgeState.Closed;
 
         this.sceneService.pixiApp?.stage.addChild(toFloor);
 
-        const fridgeIcon = this.sceneService.fridgeState() === 'closed'
+        const fridgeIcon = isFridgeClosed
             ? await this.createFridgeOpenIcon()
             : await this.createFridgeCloseIcon();
 
         this.sceneService.pixiApp?.stage.addChild(fridgeIcon);
 
-        if (this.sceneService.fridgeState() !== 'closed') {
-            const freezerIcon = this.sceneService.fridgeState() === 'open'
+        if (!isFridgeClosed) {
+            const freezerIcon = this.fridgeService.fridgeState() === FridgeState.FridgeOpened
                 ? await this.createFreezerOpenIcon()
                 : await this.createFreezerCloseIcon();
 
@@ -105,13 +106,13 @@ export class FridgeComponent {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            if (!this.sceneService.isFridgeLocked()) {
-                this.sceneService.fridgeState.set('open');
-            } else {
+            if (this.fridgeService.isFridgeLocked()) {
                 this.textService.showRandomText([
                     'It seems to be locked somehow.',
                     `It won't budge.`,
                 ], 2000);
+            } else {
+                this.fridgeService.fridgeState.set(FridgeState.FridgeOpened);
             }
         };
 
@@ -139,7 +140,7 @@ export class FridgeComponent {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            this.sceneService.fridgeState.set('closed');
+            this.fridgeService.fridgeState.set(FridgeState.Closed);
         };
 
         // be visible on hover
@@ -166,13 +167,13 @@ export class FridgeComponent {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            if (!this.sceneService.isFreezerLocked()) {
-                this.sceneService.fridgeState.set('freezer-open');
-            } else {
+            if (this.fridgeService.isFreezerLocked()) {
                 this.textService.showRandomText([
                     'It seems to be locked somehow.',
                     `It won't budge.`,
                 ], 2000);
+            } else {
+                this.fridgeService.fridgeState.set(FridgeState.FreezerOpened);
             }
         };
 
@@ -200,7 +201,7 @@ export class FridgeComponent {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            this.sceneService.fridgeState.set('open');
+            this.fridgeService.fridgeState.set(FridgeState.FridgeOpened);
         };
 
         // be visible on hover

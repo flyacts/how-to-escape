@@ -4,9 +4,10 @@
 
 import { Component, computed, Signal } from '@angular/core';
 
-import { Scene } from '../../enum';
+import { FridgeState, Scene } from '../../enum';
 import { Arrow, createArrow } from '../../helpers';
 import { createRectangle, Rectangle } from '../../helpers/create-rectangle.function';
+import { FridgeService } from '../../services/fridge.service';
 import { SceneService } from '../../services/scene.service';
 import { TextService } from '../../services/text.service';
 
@@ -33,6 +34,7 @@ export class DeskQsKeyboardComponent {
     public text = '';
 
     public constructor(
+        private fridgeService: FridgeService,
         private sceneService: SceneService,
         private textService: TextService,
     ) {
@@ -96,7 +98,7 @@ export class DeskQsKeyboardComponent {
 
             if (this.text === 'cr4ftw3rk') {
                 await successAudio.play();
-                this.sceneService.isFridgeLocked.set(false);
+                this.fridgeService.isFridgeLocked.set(false);
                 this.textService.showText('There was a click sound near the fridge.');
             } else {
                 await failureAudio.play();
