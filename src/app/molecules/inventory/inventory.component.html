@@ -1,8 +1,11 @@
 <div class="inventory-toggle">
     <img src="../../../assets/icons/backpack.svg" alt="" (click)="isOpen = !isOpen">
     <div class="inventory-list" [ngClass]="{'isOpen': isOpen}">
-        <div class="inventory-item" *ngFor="let item of inventory" (click)="useInventoryItem(item)">
-            <img [src]="'../../../assets/images/' + item.imageName" alt="">
-        </div>
+        <p *ngIf="inventory.length < 1 && isOpen">no item</p>
+        <ng-container *ngIf="inventory.length >= 1">
+            <div class="inventory-item" *ngFor="let item of inventory" (click)="useInventoryItem(item)">
+                <img [src]="'../../../assets/images/' + item.imageName" alt="">
+            </div>
+        </ng-container>
     </div>
 </div>

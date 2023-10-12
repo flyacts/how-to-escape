@@ -6,6 +6,7 @@ import { Component, DestroyRef, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 
+import { InventoryService } from '../../services/inventory.service';
 import { KeyboardService } from '../../services/keyboard.service';
 
 
@@ -23,25 +24,15 @@ export class InventoryComponent implements OnInit {
 
     public isOpen = false;
 
-    public inventory: InventoryItemInterface[] = [
-        {
-            name: 'Bananenschale',
-            imageName: 'banana.png',
-        },
-        {
-            name: 'Mate',
-            imageName: 'mate.png',
-        },
-        {
-            name: 'Ananas',
-            imageName: 'pineapple.webp',
-        },
-    ];
+    public inventory: InventoryItemInterface[] = [];
 
     public constructor(
+        private inventoryService: InventoryService,
         private destroyRef: DestroyRef,
         private keyboardService: KeyboardService,
-    ) { }
+    ) {
+        this.inventory = this.inventoryService.getInventory();
+    }
 
     /**
      * on init

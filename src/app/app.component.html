@@ -9,12 +9,13 @@
 
     <!-- DEV -->
     <app-desk-dev-daniel *ngIf="currentScene() === scene.DeskDevDaniel" [@fadeIn]></app-desk-dev-daniel>
-    <app-desk-dev-daniel-headphones *ngIf="currentScene() === scene.DeskDevDanielHeadphones" [@fadeIn]></app-desk-dev-daniel-headphones>
+    <app-desk-dev-daniel-no-headphones *ngIf="currentScene() === scene.DeskDevDanielNoHeadphones" [@fadeIn]></app-desk-dev-daniel-no-headphones>
     <app-desk-dev-mike *ngIf="currentScene() === scene.DeskDevMike" [@fadeIn]></app-desk-dev-mike>
     <app-desk-dev-toni *ngIf="currentScene() === scene.DeskDevToni" [@fadeIn]></app-desk-dev-toni>
 
     <!-- DS -->
-    <app-desk-ds-sascha *ngIf="currentScene() === scene.DeskDsSascha" [@fadeIn]></app-desk-ds-sascha>
+    <app-desk-ds-sascha *ngIf="currentScene() === scene.DeskDsSascha" [@fadeIn]></app-desk-ds-sascha>    
+    <app-desk-ds-sascha-keyboard *ngIf="currentScene() === scene.DeskDsSaschaKeyboard" [@fadeIn]></app-desk-ds-sascha-keyboard>
 
     <!-- AC -->
     <app-floor-ac *ngIf="currentScene() === scene.FloorAc" [@fadeIn]></app-floor-ac>

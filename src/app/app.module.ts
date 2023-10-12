@@ -12,11 +12,12 @@ import { DialogComponent } from './organisms/dialog/dialog.component';
 import { CouchComponent } from './templates/couch/couch.component';
 import { DeskDevDanielComponent } from './templates/desk-dev-daniel/desk-dev-daniel.component';
 import {
-    DeskDevDanielHeadphonesComponent,
-} from './templates/desk-dev-daniel-headphones/desk-dev-daniel-headphones.component';
+    DeskDevDanielNoHeadphonesComponent,
+} from './templates/desk-dev-daniel-no-headphones/desk-dev-daniel-no-headphones.component';
 import { DeskDevMikeComponent } from './templates/desk-dev-mike/desk-dev-mike.component';
 import { DeskDevToniComponent } from './templates/desk-dev-toni/desk-dev-toni.component';
 import { DeskDsSaschaComponent } from './templates/desk-ds-sascha/desk-ds-sascha.component';
+import { DeskDsSaschaKeyboardComponent } from './templates/desk-ds-sascha-keyboard/desk-ds-sascha-keyboard.component';
 import { DeskQsComponent } from './templates/desk-qs/desk-qs.component';
 import { DeskQsKeyboardComponent } from './templates/desk-qs-keyboard/desk-qs-keyboard.component';
 import { DoorComponent } from './templates/door/door.component';
@@ -34,10 +35,11 @@ import { StartScreenComponent } from './templates/start-screen/start-screen.comp
         StartScreenComponent,
         PcQsComponent,
         DeskDevDanielComponent,
-        DeskDevDanielHeadphonesComponent,
+        DeskDevDanielNoHeadphonesComponent,
         DeskDevMikeComponent,
         DeskDevToniComponent,
         DeskDsSaschaComponent,
+        DeskDsSaschaKeyboardComponent,
         DeskQsComponent,
         DeskQsKeyboardComponent,
         DoorComponent,
