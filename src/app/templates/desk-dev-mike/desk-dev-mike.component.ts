@@ -7,8 +7,9 @@ import { Component, computed, OnInit, Signal, signal } from '@angular/core';
 import * as PIXI from 'pixi.js';
 
 import { fadeInAnimation, fadeOutAnimation } from '../../animations';
-import { Scene } from '../../enum';
+import { LightBulbState, Scene } from '../../enum';
 import { Arrow, createArrow, createIcon } from '../../helpers';
+import { LightBulbService } from '../../services/light-bulb.service';
 import { SceneService } from '../../services/scene.service';
 import { TextService } from '../../services/text.service';
 
@@ -35,6 +36,7 @@ export class DeskDevMikeComponent implements OnInit {
     );
 
     public constructor(
+        private lightBulbService: LightBulbService,
         private sceneService: SceneService,
         private textService: TextService,
     ) { }
@@ -76,13 +78,16 @@ export class DeskDevMikeComponent implements OnInit {
     public onLampMenuOptionClick(
         index: number,
     ): void {
+        // toggle lamp
         if (index === 0) {
             this.sceneService.isDevDeskMikeLightOn.set(!this.sceneService.isDevDeskMikeLightOn());
         }
 
+        // unscrew lamp and put it in inventory
         if (index === 1) {
-            this.textService.showText('Picked up light bulb', 2000);
+            this.textService.showText('Picked up light bulb.', 2000);
             this.sceneService.isDevDeskMikeLightOn.set(false);
+            this.lightBulbService.lightBulbState.set(LightBulbState.InInventory);
         }
 
         this.isLampMenuOpen.set(false);
@@ -99,7 +104,12 @@ export class DeskDevMikeComponent implements OnInit {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            this.isLampMenuOpen.set(true);
+            // only show menu if light bulb is still unscrewed in here
+            if (this.lightBulbService.lightBulbState() === LightBulbState.InDevMikesLamp) {
+                this.isLampMenuOpen.set(true);
+            } else {
+                this.textService.showText('There in no light bulb in here.', 3000);
+            }
         };
 
         // be visible on hover

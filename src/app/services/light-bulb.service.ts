@@ -4,29 +4,29 @@
 
 import { effect, Injectable, signal, WritableSignal } from '@angular/core';
 
-import { BooleanEnum } from '../enum';
+import { LightBulbState } from '../enum';
 import { LocalStorageService } from './local-storage.service';
 
 
 @Injectable({
     providedIn: 'root',
 })
-export class DeskQsService {
+export class LightBulbService {
 
-    public hasChangedLightBulb: WritableSignal<boolean>;
+    public lightBulbState: WritableSignal<LightBulbState>;
 
     public constructor(
         private localStorageService: LocalStorageService,
     ) {
-        this.hasChangedLightBulb = signal(
-            this.localStorageService.get('HAS_CHANGED_LIGHT_BLUB') === BooleanEnum.True,
+        this.lightBulbState = signal(
+            this.localStorageService.get('LIGHT_BULB_STATE') ?? LightBulbState.InDevMikesLamp,
         );
 
         effect(() => {
-            if (this.hasChangedLightBulb()) {
+            if (this.lightBulbState()) {
                 this.localStorageService.set(
-                    'HAS_CHANGED_LIGHT_BLUB',
-                    this.hasChangedLightBulb().toString() as BooleanEnum,
+                    'LIGHT_BULB_STATE',
+                    this.lightBulbState(),
                 );
             }
         });

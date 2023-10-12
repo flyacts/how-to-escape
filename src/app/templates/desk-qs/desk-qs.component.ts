@@ -5,9 +5,9 @@
 import { Component, computed, OnInit, Signal } from '@angular/core';
 import * as PIXI from 'pixi.js';
 
-import { Scene } from '../../enum';
+import { LightBulbState, Scene } from '../../enum';
 import { Arrow, createArrow, createIcon } from '../../helpers';
-import { DeskQsService } from '../../services/desk-qs.service';
+import { LightBulbService } from '../../services/light-bulb.service';
 import { SceneService } from '../../services/scene.service';
 import { TextService } from '../../services/text.service';
 
@@ -21,7 +21,7 @@ export class DeskQsComponent implements OnInit {
     public iconSrc: Signal<string>;
 
     public constructor(
-        private deskQsService: DeskQsService,
+        private lightBulbService: LightBulbService,
         private sceneService: SceneService,
         private textService: TextService,
     ) {
@@ -76,7 +76,7 @@ export class DeskQsComponent implements OnInit {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            if (this.deskQsService.hasChangedLightBulb()) {
+            if (this.lightBulbService.lightBulbState() === LightBulbState.InQsDeskLamp) {
                 this.sceneService.isQsDeskLightOn.set(!this.sceneService.isQsDeskLightOn());
             } else {
                 this.textService.showText(
