@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { InventoryComponent } from './molecules/inventory/inventory.component';
+import { DialogComponent } from './organisms/dialog/dialog.component';
 import { CouchComponent } from './templates/couch/couch.component';
 import { DeskDevDanielComponent } from './templates/desk-dev-daniel/desk-dev-daniel.component';
 import {
@@ -45,6 +46,7 @@ import { StartScreenComponent } from './templates/start-screen/start-screen.comp
         FlymanComponent,
         FridgeComponent,
         InventoryComponent,
+        DialogComponent,
     ],
     imports: [
         BrowserAnimationsModule,

@@ -1,0 +1,12 @@
+<div class="dialog">
+    <div *ngIf="title" class="title">{{ title }}</div>
+
+    <div class="options">
+        <div
+            *ngFor="let option of options; let index = index"
+            class="option"
+            (click)="onOptionClick.emit(index)">
+            {{ option }}
+        </div>
+    </div>
+</div>
