@@ -3,10 +3,12 @@
  */
 
 import { Component, Signal, signal } from '@angular/core';
+import * as PIXI from 'pixi.js';
 
 import { Scene } from '../../enum';
-import { Arrow, createArrow } from '../../helpers';
+import { Arrow, createArrow, createIcon } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
+import { TextService } from '../../services/text.service';
 
 @Component({
     selector: 'app-desk-ds-sascha',
@@ -19,14 +21,19 @@ export class DeskDsSaschaComponent {
 
     public constructor(
         private sceneService: SceneService,
+        private textService: TextService,
     ) {
-        this.iconSrc = signal('../../../assets/images/desk_ds_1.png');
+        this.iconSrc = signal('../../../assets/images/desk_ds_2.png');
     }
 
-    public ngOnInit(): void {
+    public async ngOnInit(): Promise<void> {
         const toDeskDevToni = this.createDeskDevToniArrow();
+        const stormTrooperIcon = await this.createStormTrooperIcon();
+        const keyboardIcon = await this.createKeyboardIcon();
 
         this.sceneService.pixiApp?.stage.addChild(toDeskDevToni);
+        this.sceneService.pixiApp?.stage.addChild(stormTrooperIcon);
+        this.sceneService.pixiApp?.stage.addChild(keyboardIcon);
     }
 
     /**
@@ -47,5 +54,59 @@ export class DeskDsSaschaComponent {
         };
 
         return toDeskToni;
+    }
+
+    /**
+     * create stormtrooper icon
+     */
+    private async createStormTrooperIcon(): Promise<PIXI.Sprite> {
+        const sprite = await createIcon('../../../assets/icons/search.svg', 840, 550);
+
+        // be initially invisible
+        sprite.alpha = 0;
+
+        // toggle on click
+        sprite.onmouseup = (): void => {
+            this.textService.showText('Random question to get the transponder for the door?');
+        };
+
+        // be visible on hover
+        sprite.onmouseover = (): void => {
+            sprite.alpha = 1;
+
+            // be invisible again on leave
+            sprite.onmouseleave = (): void => {
+                sprite.alpha = 0;
+            };
+        };
+
+        return sprite;
+    }
+
+    /**
+     * create keyboard icon
+     */
+    private async createKeyboardIcon(): Promise<PIXI.Sprite> {
+        const sprite = await createIcon('../../../assets/icons/search.svg', 650, 630);
+
+        // be initially invisible
+        sprite.alpha = 0;
+
+        // toggle on click
+        sprite.onmouseup = (): void => {
+            this.sceneService.currentScene.set(Scene.DeskDsSaschaKeyboard);
+        };
+
+        // be visible on hover
+        sprite.onmouseover = (): void => {
+            sprite.alpha = 1;
+
+            // be invisible again on leave
+            sprite.onmouseleave = (): void => {
+                sprite.alpha = 0;
+            };
+        };
+
+        return sprite;
     }
 }

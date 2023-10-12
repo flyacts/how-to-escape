@@ -11,6 +11,7 @@ export enum Scene {
     DeskDevToni = 'deskDevToni',
     DeskDevMike = 'deskDevMike',
     DeskDsSascha = 'deskDsSascha',
+    DeskDsSaschaKeyboard = 'deskDsSaschaKeyboard',
     DeskQS = 'deskQS',
     DeskQSIntro = 'deskQSIntro',
     DeskQSKeyboard = 'deskQSKeyboard',
