@@ -21,23 +21,21 @@ export class FridgeService {
         private localStorageService: LocalStorageService,
     ) {
         this.isFridgeLocked = signal(
-            this.localStorageService.get('IS_FRIDGE_LOCKED') === BooleanEnum.True,
+            this.localStorageService.get('IS_FRIDGE_LOCKED') === BooleanEnum.True
+            || this.localStorageService.get('IS_FRIDGE_LOCKED') === BooleanEnum.True,
         );
 
         effect(() => {
-            if (this.isFreezerLocked()) {
-                this.localStorageService.set('IS_FRIDGE_LOCKED', this.isFridgeLocked().toString() as BooleanEnum);
-            }
+            this.localStorageService.set('IS_FRIDGE_LOCKED', this.isFridgeLocked().toString() as BooleanEnum);
         });
 
         this.isFreezerLocked = signal(
-            this.localStorageService.get('IS_FREEZER_LOCKED') === BooleanEnum.True,
+            this.localStorageService.get('IS_FREEZER_LOCKED') === BooleanEnum.True
+            || this.localStorageService.get('IS_FREEZER_LOCKED') === null,
         );
 
         effect(() => {
-            if (this.isFreezerLocked()) {
-                this.localStorageService.set('IS_FREEZER_LOCKED', this.isFridgeLocked().toString() as BooleanEnum);
-            }
+            this.localStorageService.set('IS_FREEZER_LOCKED', this.isFreezerLocked().toString() as BooleanEnum);
         });
 
         this.fridgeState = signal(
