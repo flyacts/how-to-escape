@@ -4,11 +4,13 @@
 
 import { Injectable } from '@angular/core';
 
-import { FridgeState, Scene } from '../enum';
+import { BooleanEnum, FridgeState, Scene } from '../enum';
 
 export interface LocalStorageKeys {
     CURRENT_SCENE: Scene;
     FRIDGE_STATE: FridgeState;
+    IS_FREEZER_LOCKED: BooleanEnum,
+    IS_FRIDGE_LOCKED: BooleanEnum,
 }
 
 @Injectable({
@@ -17,11 +19,6 @@ export interface LocalStorageKeys {
 export class LocalStorageService {
 
     private readonly PREFIX = 'HOW_TO_ESCAPE';
-
-    private readonly KEYS = {
-        currentScene: 'CURRENT_SCENE',
-        isFridgeLocked: 'IS_FRIDGE_LOCKED',
-    };
 
     /**
      * get the value of a item in local storage
@@ -33,9 +30,7 @@ export class LocalStorageService {
     ): LocalStorageKeys[Key] | null {
         const item = localStorage.getItem(this.toKey(key));
 
-        return (item)
-            ? item as LocalStorageKeys[Key] & string
-            : null;
+        return (item) ? item as LocalStorageKeys[Key] : null;
     }
 
     /**
@@ -48,10 +43,7 @@ export class LocalStorageService {
         key: Key,
         value: LocalStorageKeys[Key],
     ): void {
-        localStorage.setItem(
-            this.toKey(key),
-            value.toString(),
-        );
+        localStorage.setItem(this.toKey(key), value.toString());
     }
 
     /**

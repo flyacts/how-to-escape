@@ -3,8 +3,7 @@
  */
 
 export enum FridgeState {
-    ClosedAndLocked = 'closedAndLocked',
-    ClosedAndUnlocked = 'closedAndUnlocked',
-    Opened = 'opened',
+    Closed = 'closed',
+    FridgeOpened = 'fridgeOpened',
     FreezerOpened = 'freezerOpened',
 }
