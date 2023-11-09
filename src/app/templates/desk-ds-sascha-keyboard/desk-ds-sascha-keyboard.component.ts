@@ -14,6 +14,7 @@ import { TextService } from '../../services/text.service';
 
 const KEYS: Map<string, { x: number, y: number }> = new Map();
 
+KEYS.set('^', { x: 150, y: 442 });
 KEYS.set('1', { x: 200, y: 442 });
 KEYS.set('2', { x: 250, y: 442 });
 KEYS.set('3', { x: 300, y: 442 });
@@ -24,6 +25,43 @@ KEYS.set('7', { x: 500, y: 442 });
 KEYS.set('8', { x: 550, y: 442 });
 KEYS.set('9', { x: 600, y: 442 });
 KEYS.set('0', { x: 650, y: 442 });
+KEYS.set('ß', { x: 700, y: 442 });
+KEYS.set('`', { x: 750, y: 442 });
+KEYS.set('q', { x: 225, y: 500 });
+KEYS.set('w', { x: 275, y: 500 });
+KEYS.set('e', { x: 325, y: 500 });
+KEYS.set('r', { x: 375, y: 500 });
+KEYS.set('t', { x: 425, y: 500 });
+KEYS.set('z', { x: 475, y: 500 });
+KEYS.set('u', { x: 525, y: 500 });
+KEYS.set('i', { x: 575, y: 500 });
+KEYS.set('o', { x: 625, y: 500 });
+KEYS.set('p', { x: 675, y: 500 });
+KEYS.set('ü', { x: 725, y: 500 });
+KEYS.set('+', { x: 775, y: 500 });
+KEYS.set('a', { x: 236, y: 554 });
+KEYS.set('s', { x: 286, y: 554 });
+KEYS.set('d', { x: 336, y: 554 });
+KEYS.set('f', { x: 386, y: 554 });
+KEYS.set('g', { x: 436, y: 554 });
+KEYS.set('h', { x: 486, y: 554 });
+KEYS.set('j', { x: 536, y: 554 });
+KEYS.set('k', { x: 586, y: 554 });
+KEYS.set('l', { x: 636, y: 554 });
+KEYS.set('ö', { x: 686, y: 554 });
+KEYS.set('ä', { x: 736, y: 554 });
+KEYS.set('#', { x: 786, y: 554 });
+KEYS.set('<', { x: 212, y: 607 });
+KEYS.set('y', { x: 262, y: 607 });
+KEYS.set('x', { x: 312, y: 607 });
+KEYS.set('c', { x: 362, y: 607 });
+KEYS.set('v', { x: 412, y: 607 });
+KEYS.set('b', { x: 462, y: 607 });
+KEYS.set('n', { x: 512, y: 607 });
+KEYS.set('m', { x: 562, y: 607 });
+KEYS.set(',', { x: 612, y: 607 });
+KEYS.set('.', { x: 662, y: 607 });
+KEYS.set('-', { x: 712, y: 607 });
 
 @Component({
     selector: 'app-desk-ds-sascha-keyboard',
@@ -63,6 +101,11 @@ export class DeskDsSaschaKeyboardComponent {
         failureAudio.src = '../../assets/audio/fail.mp3';
         failureAudio.load();
 
+        const niceAudio = new Audio();
+
+        niceAudio.src = '../../assets/audio/noice.mp3';
+        niceAudio.load();
+
         for (const key of KEYS.entries()) {
             const keyRect = this.createKeyRect(key[1].x, key[1].y);
 
@@ -73,8 +116,10 @@ export class DeskDsSaschaKeyboardComponent {
                 keypressAudio.currentTime = 0;
                 await keypressAudio.play();
 
-                this.text = `${this.text}${key[0]}`;
-                this.text = this.text.substring(0, 9);
+                if (this.text.length < 2) {
+                    this.text = `${this.text}${key[0]}`;
+                    this.text = this.text.substring(0, 9);
+                }
             });
 
             this.sceneService.pixiApp?.stage.addChild(keyRect);
@@ -100,6 +145,13 @@ export class DeskDsSaschaKeyboardComponent {
             if (this.text === '42') {
                 await successAudio.play();
                 this.textService.showText('You found a transponder. For what?');
+                this.inventoryService.addItemToInventory({
+                    name: InventoryItemEnum.Transponder,
+                    imageName: 'transponder.png',
+                });
+            } else if (this.text === '69') {
+                await niceAudio.play();
+                this.textService.showText('Noice! \n You found a transponder.');
                 this.inventoryService.addItemToInventory({
                     name: InventoryItemEnum.Transponder,
                     imageName: 'transponder.png',

@@ -67,7 +67,7 @@ export class DeskDsSaschaComponent {
 
         // toggle on click
         sprite.onmouseup = (): void => {
-            this.textService.showText('Random question to get the transponder for the door?');
+            this.textService.showText('How old am I?');
         };
 
         // be visible on hover
