@@ -92,7 +92,7 @@ export class DeskQsComponent implements OnInit {
 
             this.inventoryService.removeItemFromInventory(item);
             this.textService.showText('You screwed the bulb in', 2000);
-            this.sceneService.isDevDeskMikeLightOn.set(true);
+            this.sceneService.isQsDeskLightOn.set(true);
             this.lightBulbService.lightBulbState.set(LightBulbState.InQsDeskLamp);
         }
 
