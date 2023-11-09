@@ -12,6 +12,7 @@ export interface LocalStorageKeys {
     IS_FREEZER_LOCKED: BooleanEnum,
     IS_FRIDGE_LOCKED: BooleanEnum,
     LIGHT_BULB_STATE: LightBulbState,
+    FLYMAN_SIGN_ON: BooleanEnum,
 }
 
 @Injectable({
