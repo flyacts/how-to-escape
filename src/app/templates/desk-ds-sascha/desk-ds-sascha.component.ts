@@ -18,12 +18,17 @@ import { TextService } from '../../services/text.service';
 export class DeskDsSaschaComponent {
 
     public iconSrc: Signal<string>;
+    public stormTrooperAudio: HTMLAudioElement;
 
     public constructor(
         private sceneService: SceneService,
         private textService: TextService,
     ) {
         this.iconSrc = signal('../../../assets/images/desk_ds_2.png');
+        this.stormTrooperAudio = new Audio();
+
+        this.stormTrooperAudio.src = '../../assets/audio/stormtrooper.wav';
+        this.stormTrooperAudio.load();
     }
 
     public async ngOnInit(): Promise<void> {
@@ -66,7 +71,8 @@ export class DeskDsSaschaComponent {
         sprite.alpha = 0;
 
         // toggle on click
-        sprite.onmouseup = (): void => {
+        sprite.onmouseup = async (): Promise<void> => {
+            await this.stormTrooperAudio.play();
             this.textService.showText('How old am I?');
         };
 

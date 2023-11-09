@@ -106,19 +106,29 @@ export class DeskDsSaschaKeyboardComponent {
         niceAudio.src = '../../assets/audio/noice.mp3';
         niceAudio.load();
 
+        const maxLengthAudio = new Audio();
+
+        maxLengthAudio.src = '../../assets/audio/invalid.mp3';
+        maxLengthAudio.load();
+
         for (const key of KEYS.entries()) {
             const keyRect = this.createKeyRect(key[1].x, key[1].y);
 
             keyRect.on('mouseup', async () => {
                 console.log(`pressed ${key[0]}`);
 
-                keypressAudio.pause();
-                keypressAudio.currentTime = 0;
-                await keypressAudio.play();
 
                 if (this.text.length < 2) {
+                    keypressAudio.pause();
+                    keypressAudio.currentTime = 0;
+                    await keypressAudio.play();
+
                     this.text = `${this.text}${key[0]}`;
                     this.text = this.text.substring(0, 9);
+                } else {
+                    maxLengthAudio.pause();
+                    maxLengthAudio.currentTime = 0;
+                    await maxLengthAudio.play();
                 }
             });
 
