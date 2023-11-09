@@ -4,7 +4,7 @@
         <p *ngIf="inventory().length < 1 && isOpen">no item</p>
         <ng-container *ngIf="inventory().length >= 1">
             <div class="inventory-item" *ngFor="let item of inventory()" (click)="useInventoryItem(item)">
-                <img [src]="'../../../assets/images/' + item.imageName" alt="">
+                <img [src]="'../../../assets/images/inventory/' + item.imageName" [title]="item.name">
             </div>
         </ng-container>
     </div>

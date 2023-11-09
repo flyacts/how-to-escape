@@ -3,9 +3,11 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { Sprite } from 'pixi.js';
 
 import { Scene } from '../../enum';
-import { Arrow, createArrow, createCircle, InteractionCircle } from '../../helpers';
+import { Arrow, createArrow, createCircle, createIcon, InteractionCircle } from '../../helpers';
+import { createRectangle, Rectangle } from '../../helpers/create-rectangle.function';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
@@ -15,11 +17,13 @@ import { SceneService } from '../../services/scene.service';
 })
 export class FloorAcComponent implements OnInit {
 
+    private mgsAlert!: Sprite;
+
     public constructor(
         private sceneService: SceneService,
     ) { }
 
-    public ngOnInit(): void {
+    public async ngOnInit(): Promise<void> {
         const goToDoor = this.createDoorTeleport();
         const goToDevDeskDaniel = this.createDevDanielTeleport();
         const goToDevDeskMike = this.createDevMikeTeleport();
@@ -27,12 +31,19 @@ export class FloorAcComponent implements OnInit {
         const goToCouch = this.createCouchTarget();
         const goToFridge = this.createFridgeTarget();
 
+        const boxTrigger = this.createBoxTrigger();
+
+        this.mgsAlert = await createIcon('../../../assets/icons/mgs_alert.svg', 390, 0, 100, 100);
+        this.mgsAlert.alpha = 0;
+
         this.sceneService.pixiApp?.stage.addChild(goToCouch);
         this.sceneService.pixiApp?.stage.addChild(goToDoor);
         this.sceneService.pixiApp?.stage.addChild(goToFridge);
         this.sceneService.pixiApp?.stage.addChild(goToDevDeskDaniel);
         this.sceneService.pixiApp?.stage.addChild(goToDevDeskMike);
         this.sceneService.pixiApp?.stage.addChild(goToDevDeskToni);
+        this.sceneService.pixiApp?.stage.addChild(boxTrigger);
+        this.sceneService.pixiApp?.stage.addChild(this.mgsAlert);
     }
 
     public goToQsFloor(): void {
@@ -144,6 +155,36 @@ export class FloorAcComponent implements OnInit {
         return goToFridge;
     }
 
+    public createBoxTrigger(): Rectangle {
+        const boxTrigger = createRectangle({
+            x: 410,
+            y: 135,
+            width: 45,
+            height: 70,
+            angle: -3,
+            color: 0x10ABF3,
+            alpha: 0,
+        });
+
+        boxTrigger.onmouseup = async (): Promise<void> => {
+            const audio = new Audio();
+
+            audio.src = '../../../assets/audio/mgs_alert.mp3';
+            audio.load();
+
+            await audio.play();
+
+            setTimeout(() => {
+                this.mgsAlert.alpha = 1;
+
+                setTimeout(() => {
+                    this.mgsAlert.alpha = 0;
+                }, 1500);
+            }, 200);
+        };
+
+        return boxTrigger;
+    }
 
     /**
      * setup

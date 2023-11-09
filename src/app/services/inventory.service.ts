@@ -48,14 +48,14 @@ export class InventoryService {
         if (this.lightBulbService.lightBulbState() === LightBulbState.InInventory) {
             this.addItemToInventory({
                 name: InventoryItemEnum.Lightbulb,
-                imageName: 'pineapple.webp',
+                imageName: 'bulb.png',
             });
         }
 
         if (this.headsetService.headsetState() === HeadsetState.InInventory) {
             this.addItemToInventory({
                 name: InventoryItemEnum.Headset,
-                imageName: 'headset.jpg',
+                imageName: 'headset.png',
             });
         }
     }
