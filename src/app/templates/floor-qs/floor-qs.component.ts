@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 import { BlurFilter, Graphics } from 'pixi.js';
 
 import { Scene } from '../../enum';
-import { createArrow, createCircle } from '../../helpers';
+import { createArrow } from '../../helpers';
 import { SceneService } from '../../services/scene.service';
 
 @Component({
@@ -53,9 +53,34 @@ export class FloorQsComponent {
         qsDeskOutline.onmouseup = (): void => {
             this.goToQsDesk();
         };
-
-
         this.sceneService.pixiApp?.stage.addChild(qsDeskOutline);
+
+        const devDanielDeskPath = [
+            1020, 820,
+            1070, 810,
+            1085, 735,
+            1330, 770,
+            1335, 795,
+            1355, 805,
+            1360, 775,
+            1165, 660,
+            1180, 580,
+            1165, 570,
+            1165, 540,
+            1115, 510,
+            995, 490,
+            990, 580,
+            1050, 600,
+            1050, 610,
+            885, 610,
+        ];
+        const devDanielDeskOutline = this.createOutline(devDanielDeskPath);
+
+        devDanielDeskOutline.onmouseup = (): void => {
+            this.goToDeskDevDaniel();
+        };
+        this.sceneService.pixiApp?.stage.addChild(devDanielDeskOutline);
+
 
         const goToACFloor = createArrow({
             tipX: 700,
@@ -70,20 +95,6 @@ export class FloorQsComponent {
         };
 
         this.sceneService.pixiApp?.stage.addChild(goToACFloor);
-
-        const goToDeskDevDaniel = createCircle({
-            x: 1050,
-            y: 650,
-            size: 20,
-            color: 0x10ABF3,
-        });
-
-        goToDeskDevDaniel.onmouseup = (): void => {
-            this.goToDeskDevDaniel();
-        };
-
-        this.sceneService.pixiApp?.stage.addChild(goToDeskDevDaniel);
-
 
     }
 
