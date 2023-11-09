@@ -3,6 +3,7 @@
  */
 
 import { Component } from '@angular/core';
+import { BlurFilter, Graphics } from 'pixi.js';
 
 import { Scene } from '../../enum';
 import { createArrow, createCircle } from '../../helpers';
@@ -35,18 +36,26 @@ export class FloorQsComponent {
      * setup
      */
     public setup(): void {
-        const goToQSDesk = createCircle({
-            x: 1400,
-            y: 900,
-            color: 0x10ABF3,
-            size: 20,
-        });
+        const qsDeskPath = [
+            1210, 1100,
+            1020, 820,
+            1070, 810,
+            1085, 735,
+            1330, 770,
+            1335, 795,
+            1355, 805,
+            1395, 620,
+            1700, 680,
+            1700, 1100,
+        ];
+        const qsDeskOutline = this.createOutline(qsDeskPath);
 
-        goToQSDesk.onmouseup = (): void => {
+        qsDeskOutline.onmouseup = (): void => {
             this.goToQsDesk();
         };
 
-        this.sceneService.pixiApp?.stage.addChild(goToQSDesk);
+
+        this.sceneService.pixiApp?.stage.addChild(qsDeskOutline);
 
         const goToACFloor = createArrow({
             tipX: 700,
@@ -76,5 +85,36 @@ export class FloorQsComponent {
         this.sceneService.pixiApp?.stage.addChild(goToDeskDevDaniel);
 
 
+    }
+
+    private createOutline(path: number[]): Graphics {
+        const outline = new Graphics();
+
+        outline.lineStyle(5, 0xEEEEEE, 1);
+        outline.alpha = 0;
+        outline.beginFill(0xEEEEEE, 0.3);
+        outline.drawPolygon(path);
+        outline.endFill();
+
+        outline.interactive = true;
+        outline.cursor = 'pointer';
+
+        // blurry outline
+        const blurFilter = new BlurFilter();
+
+        blurFilter.blur = 5;
+        outline.filters = [blurFilter];
+
+        // be visible on hover
+        outline.onmouseover = (): void => {
+            outline.alpha = 1;
+
+            // be invisible again on leave
+            outline.onmouseleave = (): void => {
+                outline.alpha = 0;
+            };
+        };
+
+        return outline;
     }
 }

@@ -73,7 +73,7 @@ export class DeskDevDanielComponent implements OnInit {
         if (index === 1) {
             const item: InventoryItemInterface = {
                 name: InventoryItemEnum.Headset,
-                imageName: 'headset.jpg',
+                imageName: 'headset.png',
             };
 
             this.inventoryService.addItemToInventory(item);
