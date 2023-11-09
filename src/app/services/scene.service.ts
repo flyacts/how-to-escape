@@ -22,6 +22,7 @@ export class SceneService {
     public isQsDeskLightOn: WritableSignal<boolean> = signal(false);
     public isDevDeskMikeLightOn: WritableSignal<boolean> = signal(false);
     public isDevDeskToniBoxOpen: WritableSignal<boolean> = signal(false);
+    public isDevDeskDanielHeadsetTaken: WritableSignal<boolean> = signal(false);
 
     public showInventory: WritableSignal<boolean> = signal(false);
 

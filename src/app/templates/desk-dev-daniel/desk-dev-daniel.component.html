@@ -1,3 +1,11 @@
 <div class="scene-container">
-    <img  src="../../../assets/images/desk_dev_daniel_1.png">
+    <img [src]="imgSrc()">
 </div>
+
+<app-dialog
+    *ngIf="isHeadsetMenuOpen()"
+    [@fadeIn]
+    [@fadeOut]
+    [options]="headsetMenuOptions()"
+    (onOptionClick)="onHeadsetMenuOptionClick($event)">
+</app-dialog>

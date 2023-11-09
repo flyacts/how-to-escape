@@ -3,11 +3,11 @@
  */
 
 
-import { effect, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { LightBulbState } from '../enum';
-import { InventoryItemEnum } from '../enum/inventory-items.enum';
+import { HeadsetState, InventoryItemEnum, LightBulbState } from '../enum';
 import { InventoryItemInterface } from '../interfaces/inventory-item.interface';
+import { HeadsetService } from './headset.service';
 import { LightBulbService } from './light-bulb.service';
 
 
@@ -19,24 +19,12 @@ export class InventoryService {
     private inventory: InventoryItemInterface[];
 
     public constructor(
-        private lighbulbService: LightBulbService,
+        private lightBulbService: LightBulbService,
+        private headsetService: HeadsetService,
     ) {
         this.inventory = [];
 
-
-        effect(() => {
-            const item: InventoryItemInterface = {
-                name: InventoryItemEnum.Lightbulb,
-                imageName: 'banana.png',
-            };
-
-            if (this.lighbulbService.lightBulbState() === LightBulbState.InInventory) {
-                this.addItemToInventory(item);
-            } else {
-                this.removeItemFromInventory(item);
-            }
-        });
-
+        this.initInventory();
     }
 
     public getInventory(): InventoryItemInterface[] {
@@ -55,6 +43,22 @@ export class InventoryService {
 
     public removeItemFromInventory(item: InventoryItemInterface): void {
         this.inventory = this.inventory.filter(i => i.name !== item.name);
+    }
+
+    private initInventory(): void {
+        if (this.lightBulbService.lightBulbState() === LightBulbState.InInventory) {
+            this.addItemToInventory({
+                name: InventoryItemEnum.Lightbulb,
+                imageName: 'pineapple.webp',
+            });
+        }
+
+        if (this.headsetService.headsetState() === HeadsetState.InInventory) {
+            this.addItemToInventory({
+                name: InventoryItemEnum.Headset,
+                imageName: 'headset.jpg',
+            });
+        }
     }
 
 }

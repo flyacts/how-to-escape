@@ -91,7 +91,7 @@ export class DeskDevMikeComponent implements OnInit {
         if (index === 1) {
             const item: InventoryItemInterface = {
                 name: InventoryItemEnum.Lightbulb,
-                imageName: 'banana.png',
+                imageName: 'pineapple.webp',
             };
 
             this.inventoryService.addItemToInventory(item);
