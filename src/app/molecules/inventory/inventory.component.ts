@@ -24,15 +24,13 @@ export class InventoryComponent implements OnInit {
 
     public isOpen = false;
 
-    public inventory: InventoryItemInterface[] = [];
+    public inventory = this.inventoryService.inventory;
 
     public constructor(
         private inventoryService: InventoryService,
         private destroyRef: DestroyRef,
         private keyboardService: KeyboardService,
-    ) {
-        this.inventory = this.inventoryService.getInventory();
-    }
+    ) {}
 
     /**
      * on init

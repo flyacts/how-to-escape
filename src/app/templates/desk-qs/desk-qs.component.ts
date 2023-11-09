@@ -2,11 +2,16 @@
  * @copyright FLYACTS GmbH 2023
  */
 
-import { Component, computed, OnInit, Signal } from '@angular/core';
+import { trigger } from '@angular/animations';
+import { Component, computed, OnInit, Signal, signal } from '@angular/core';
 import * as PIXI from 'pixi.js';
 
+import { fadeInAnimation, fadeOutAnimation } from '../../animations';
 import { LightBulbState, Scene } from '../../enum';
+import { InventoryItemEnum } from '../../enum/inventory-items.enum';
 import { Arrow, createArrow, createIcon } from '../../helpers';
+import { InventoryItemInterface } from '../../interfaces/inventory-item.interface';
+import { InventoryService } from '../../services/inventory.service';
 import { LightBulbService } from '../../services/light-bulb.service';
 import { SceneService } from '../../services/scene.service';
 import { TextService } from '../../services/text.service';
@@ -15,15 +20,22 @@ import { TextService } from '../../services/text.service';
     selector: 'app-desk-qs',
     templateUrl: './desk-qs.component.html',
     styleUrls: ['./desk-qs.component.scss'],
+    animations: [
+        trigger('fadeIn', [fadeInAnimation]),
+        trigger('fadeOut', [fadeOutAnimation]),
+    ],
 })
 export class DeskQsComponent implements OnInit {
 
     public iconSrc: Signal<string>;
+    public isLampMenuOpen = signal(false);
+    public lampMenuOptions = ['Screw light bulb in', 'Cancel'];
 
     public constructor(
         private lightBulbService: LightBulbService,
         private sceneService: SceneService,
         private textService: TextService,
+        private inventoryService: InventoryService,
     ) {
         this.iconSrc = computed(() => !this.sceneService.isQsDeskLightOn()
             ? '../../../assets/images/desk_qs_1.png'
@@ -66,6 +78,28 @@ export class DeskQsComponent implements OnInit {
     }
 
     /**
+     * on lamp menu option click
+     */
+    public onLampMenuOptionClick(
+        index: number,
+    ): void {
+        // screw bulb in and remove from inventory
+        if (index === 0) {
+            const item: InventoryItemInterface = {
+                name: InventoryItemEnum.Lightbulb,
+                imageName: 'pineapple.webp',
+            };
+
+            this.inventoryService.removeItemFromInventory(item);
+            this.textService.showText('You screwed the bulb in', 2000);
+            this.sceneService.isDevDeskMikeLightOn.set(true);
+            this.lightBulbService.lightBulbState.set(LightBulbState.InQsDeskLamp);
+        }
+
+        this.isLampMenuOpen.set(false);
+    }
+
+    /**
      * create lamp icon
      */
     private async createLampIcon(): Promise<PIXI.Sprite> {
@@ -76,11 +110,16 @@ export class DeskQsComponent implements OnInit {
 
         // toggle on click
         sprite.onmouseup = (): void => {
+            const inventory = this.inventoryService.getInventory();
+            const lightbulb = inventory.find((item) => item.name === InventoryItemEnum.Lightbulb);
+
             if (this.lightBulbService.lightBulbState() === LightBulbState.InQsDeskLamp) {
                 this.sceneService.isQsDeskLightOn.set(!this.sceneService.isQsDeskLightOn());
+            } else if (lightbulb) {
+                this.isLampMenuOpen.set(true);
             } else {
                 this.textService.showText(
-                    'The lamp is not working. Maybe there is another light bulb here anywhere?',
+                    'The lamp is not working. Maybe there is another light bulb here somewhere?',
                     4000,
                 );
             }

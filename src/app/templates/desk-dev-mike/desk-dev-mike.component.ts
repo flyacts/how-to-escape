@@ -34,8 +34,8 @@ export class DeskDevMikeComponent implements OnInit {
 
     public isLampMenuOpen = signal(false);
     public lampMenuOptions = computed(() => this.sceneService.isDevDeskMikeLightOn()
-        ? ['Turn off lamp', 'Unscrew light bulb', 'Cancel']
-        : ['Turn on lamp', 'Unscrew light bulb', 'Cancel'],
+        ? ['Turn lamp off', 'Unscrew light bulb', 'Cancel']
+        : ['Turn lamp on', 'Unscrew light bulb', 'Cancel'],
     );
 
     public constructor(
@@ -118,7 +118,7 @@ export class DeskDevMikeComponent implements OnInit {
             if (this.lightBulbService.lightBulbState() === LightBulbState.InDevMikesLamp) {
                 this.isLampMenuOpen.set(true);
             } else {
-                this.textService.showText('There in no light bulb in here.', 3000);
+                this.textService.showText('There is no light bulb in here.', 3000);
             }
         };
 

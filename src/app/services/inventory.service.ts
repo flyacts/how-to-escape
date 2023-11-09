@@ -3,7 +3,7 @@
  */
 
 
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 
 import { HeadsetState, InventoryItemEnum, LightBulbState } from '../enum';
 import { InventoryItemInterface } from '../interfaces/inventory-item.interface';
@@ -16,33 +16,32 @@ import { LightBulbService } from './light-bulb.service';
 })
 export class InventoryService {
 
-    private inventory: InventoryItemInterface[];
+    public inventory: WritableSignal<InventoryItemInterface[]> = signal([]);
 
     public constructor(
         private lightBulbService: LightBulbService,
         private headsetService: HeadsetService,
     ) {
-        this.inventory = [];
-
         this.initInventory();
     }
 
     public getInventory(): InventoryItemInterface[] {
-        return this.inventory;
+        return this.inventory();
     }
 
     public addItemToInventory(item: InventoryItemInterface): void {
-        if (this.inventory.find(i => i.name === item.name)) {
+        if (this.inventory().find(i => i.name === item.name)) {
             console.error('item already in Inventory', item);
 
             return;
         }
-        this.inventory.push(item);
-
+        this.inventory().push(item);
     }
 
     public removeItemFromInventory(item: InventoryItemInterface): void {
-        this.inventory = this.inventory.filter(i => i.name !== item.name);
+        const filteredInventory = this.inventory().filter(i => i.name !== item.name);
+
+        this.inventory.update(() => filteredInventory);
     }
 
     private initInventory(): void {

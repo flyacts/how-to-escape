@@ -1,3 +1,11 @@
 <div class="scene-container">
     <img [src]="iconSrc()">
 </div>
+
+<app-dialog
+    *ngIf="isLampMenuOpen()"
+    [@fadeIn]
+    [@fadeOut]
+    [options]="lampMenuOptions"
+    (onOptionClick)="onLampMenuOptionClick($event)">
+</app-dialog>
